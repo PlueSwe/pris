@@ -52,6 +52,7 @@
   .shop .dom{display:block;color:var(--muted);font-size:11.5px;font-weight:400}
   .price{font-weight:700;font-size:15px;white-space:nowrap}
   .price .orig{display:block;font-weight:400;color:var(--muted);font-size:11.5px}
+  .camp{display:inline-block;background:#ffe9d6;color:#b45309;font-size:10px;font-weight:800;padding:2px 7px;border-radius:6px;letter-spacing:.3px;margin-top:3px}
   .barwrap{height:8px;background:#e6eaf2;border-radius:6px;overflow:hidden;min-width:90px}
   .bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2))}
   .rate{display:flex;flex-direction:column;gap:2px;min-width:120px}
@@ -147,19 +148,19 @@
    annars räknas priceEur om med växelkursen ovan. ====== */
 const data = [
   /* ===== CLIFTON 10 – bekräftade priser (ögonblicksbild 2026-06-29) ===== */
-  {model:"Clifton 10", name:"SportsShoes",    dom:"sportsshoes.com · rea AW25", flag:"🇬🇧", priceGbp:69.99, type:"shop", rating:null, count:null, url:"https://www.sportsshoes.com/product/hok2945/hoka-clifton-10-men's-running-shoes---aw25"},
+  {model:"Clifton 10", name:"SportsShoes",    dom:"sportsshoes.com · rea AW25", flag:"🇬🇧", priceGbp:69.99, camp:"−50 %", type:"shop", rating:null, count:null, url:"https://www.sportsshoes.com/product/hok2945/hoka-clifton-10-men's-running-shoes---aw25"},
   {model:"Clifton 10", name:"Runnea",         dom:"runnea.com · prisjämf.",     flag:"🇪🇸", priceEur:104.99, type:"compare",  rating:null, count:null, url:"https://www.runnea.com/zapatillas-running/hoka/clifton-10/1043777/precios/todas/"},
   {model:"Clifton 10", name:"Geizhals",       dom:"geizhals.de · prisjämf.",    flag:"🇩🇪", priceEur:99.50,  type:"compare",  rating:null, count:null, url:"https://geizhals.de/hoka-clifton-10-herren-v197431.html"},
   {model:"Clifton 10", name:"Idealo",         dom:"idealo.es · prisjämf.",      flag:"🇪🇸", priceEur:99.92,  type:"compare",  rating:null, count:null, url:"https://www.idealo.es/precios/206295585/hoka-clifton-10-1162030.html"},
-  {model:"Clifton 10", name:"Vigliettisport", dom:"vigliettisport.com · -25%",  flag:"🇮🇹", priceEur:119.00, type:"shop",     rating:null, count:null, url:"https://www.vigliettisport.com/it/1095-sport/1159-running-e-trail/1670-scarpe-strada/56524-scarpe-clifton-10-running.html"},
-  {model:"Clifton 10", name:"Deporvillage",   dom:"deporvillage.com",           flag:"🇪🇸", priceEur:119.95, type:"shop",     rating:4.4,  count:451000, url:"https://www.deporvillage.com/zapatillas-hoka-clifton-10-negro-blanco"},
-  {model:"Clifton 10", name:"Bergfreunde",    dom:"bergfreunde.de · -30%",      flag:"🇩🇪", priceEur:111.97, type:"shop",     rating:5.0,  count:9718, url:"https://www.bergfreunde.de/hoka-clifton-10-runningschuhe/"},
+  {model:"Clifton 10", name:"Vigliettisport", dom:"vigliettisport.com · -25%",  flag:"🇮🇹", priceEur:119.00, camp:"−25 %", type:"shop",     rating:null, count:null, url:"https://www.vigliettisport.com/it/1095-sport/1159-running-e-trail/1670-scarpe-strada/56524-scarpe-clifton-10-running.html"},
+  {model:"Clifton 10", name:"Deporvillage",   dom:"deporvillage.com",           flag:"🇪🇸", priceEur:119.95, camp:"−25 %", type:"shop",     rating:4.4,  count:451000, url:"https://www.deporvillage.com/zapatillas-hoka-clifton-10-negro-blanco"},
+  {model:"Clifton 10", name:"Bergfreunde",    dom:"bergfreunde.de · -30%",      flag:"🇩🇪", priceEur:111.97, camp:"−30 %", type:"shop",     rating:5.0,  count:9718, url:"https://www.bergfreunde.de/hoka-clifton-10-runningschuhe/"},
   {model:"Clifton 10", name:"Sprinter",       dom:"sprintersports.com",         flag:"🇪🇸", priceEur:129.99, type:"warn",     rating:1.3,  count:688, url:"https://www.sprintersports.com/hoka-clifton"},
   {model:"Clifton 10", name:"Passsport",      dom:"passsport.it",               flag:"🇮🇹", priceEur:144.00, type:"shop",     rating:null, count:null, url:"https://www.passsport.it/hoka-clifton-10-20545"},
   {model:"Clifton 10", name:"Löparshop",      dom:"loparshop.se",               flag:"🇸🇪", priceSek:1385,   type:"shop",     rating:4.7,  count:357, url:"https://www.loparshop.se/hoka-men-s-clifton-10-1162030-bblc.html"},
-  {model:"Clifton 10", name:"Outnorth",       dom:"outnorth.com · rea",         flag:"🇸🇪", priceSek:1469,   type:"shop",     rating:2.5,  count:null, url:"https://www.outnorth.com/se/varumarken/hoka/hoka-men-s-clifton-10-black-white-FS592025"},
-  {model:"Clifton 10", name:"RunningDirect",  dom:"runningdirect.se · rea",     flag:"🇸🇪", priceSek:1499,   type:"shop",     rating:null, count:null, url:"https://www.runningdirect.se/hoka-clifton-10-herr-1162030-nmd"},
-  {model:"Clifton 10", name:"The Running Company", dom:"therunningcompany.se · rea", flag:"🇸🇪", priceSek:1490, type:"shop", rating:null, count:null, url:"https://www.therunningcompany.se/products/hoka-m-clifton-10-rnn"},
+  {model:"Clifton 10", name:"Outnorth",       dom:"outnorth.com · rea",         flag:"🇸🇪", priceSek:1469,   camp:"−30 %", type:"shop",     rating:2.5,  count:null, url:"https://www.outnorth.com/se/varumarken/hoka/hoka-men-s-clifton-10-black-white-FS592025"},
+  {model:"Clifton 10", name:"RunningDirect",  dom:"runningdirect.se · rea",     flag:"🇸🇪", priceSek:1499,   camp:"−25 %", type:"shop",     rating:null, count:null, url:"https://www.runningdirect.se/hoka-clifton-10-herr-1162030-nmd"},
+  {model:"Clifton 10", name:"The Running Company", dom:"therunningcompany.se · rea", flag:"🇸🇪", priceSek:1490, camp:"−29 %", type:"shop", rating:null, count:null, url:"https://www.therunningcompany.se/products/hoka-m-clifton-10-rnn"},
   {model:"Clifton 10", name:"Zalando",        dom:"zalando.de",                 flag:"🇩🇪", priceEur:159.95, type:"shop",     rating:1.9,  count:null, url:"https://www.zalando.de/hoka-clifton-10-laufschuh-strasse-black-h1x42a01t-q11.html"},
   {model:"Clifton 10", name:"HOKA (officiell)",dom:"hoka.com",                  flag:"🏳️", priceEur:160.00, type:"official", rating:null, count:null, url:"https://www.hoka.com/de/de/clifton-10/"},
   {model:"Clifton 10", name:"Zalando",        dom:"zalando.se",                 flag:"🇸🇪", priceSek:1728,   type:"shop",     rating:1.9,  count:null, url:"https://www.zalando.se/hoka-clifton-10-vaegloeparskor-blackwhite-h1x41a01k-q12.html"},
@@ -216,17 +217,27 @@ function saveSnapshot(){
     h[k]=h[k].filter(p=>p.date!==today); h[k].push({date:today,sek:sek(d)});});
   localStorage.setItem(HKEY,JSON.stringify(h)); render();
 }
+/* Verklig observerad prishistorik (SEK), seedas in i trendgrafen */
+const SEED={
+  "bergfreunde.de · -30%":[["2026-06-29",1459],["2026-08-07",1276]],
+  "deporvillage.com":[["2026-06-29",1459],["2026-08-07",1367]],
+  "runnea.com · prisjämf.":[["2026-06-29",1082],["2026-08-07",1197]],
+  "sportsshoes.com · rea AW25":[["2026-06-29",938],["2026-08-07",938]],
+};
 function sparkline(d){
+  const seed=(SEED[d.dom]||[]).map(([date,v])=>({date,sek:v}));
   const h=loadHist()[d.dom]||[];
-  const pts=[...h]; const cur=sek(d);
+  const pts=[...seed.filter(s=>!h.some(p=>p.date===s.date)),...h].sort((a,b)=>a.date<b.date?-1:1);
+  const cur=sek(d);
   if(!pts.some(p=>p.date===today)) pts.push({date:today,sek:cur});
   if(pts.length<2) return '<span class="num">spara för att börja</span>';
   const w=70,ht=22,vals=pts.map(p=>p.sek),mn=Math.min(...vals),mx=Math.max(...vals),rng=mx-mn||1;
   const step=w/(pts.length-1);
   const coords=pts.map((p,i)=>`${(i*step).toFixed(1)},${(ht-((p.sek-mn)/rng)*ht).toFixed(1)}`);
-  const up=pts[pts.length-1].sek>=pts[0].sek;
-  const col=up?"var(--bad)":"var(--good)";
-  return `<svg class="spark" width="${w}" height="${ht}"><polyline points="${coords.join(' ')}" fill="none" stroke="${col}" stroke-width="2"/></svg>`;
+  const pctv=Math.round((pts[pts.length-1].sek-pts[0].sek)/pts[0].sek*100);
+  const up=pctv>0, col=pctv===0?"var(--muted)":up?"var(--bad)":"var(--good)";
+  const lbl=(pctv===0?'±0':(up?'+':'')+pctv)+' % sedan '+pts[0].date.slice(5).replace('-','/');
+  return `<svg class="spark" width="${w}" height="${ht}"><polyline points="${coords.join(' ')}" fill="none" stroke="${col}" stroke-width="2"/></svg><span class="num" style="color:${col}">${lbl}</span>`;
 }
 
 let sortMode="price", modelFilter="Clifton 10";
@@ -263,7 +274,7 @@ function render(){
     return `<tr>
       <td class="rank ${i===0?'first':''}">${i+1}</td>
       <td><span class="shop">${d.flag} ${d.name}</span><span class="dom">${d.dom}</span></td>
-      <td class="price${d.est?' estp':''}">${d.est?'≈ ':''}${fmt(s)}<span class="orig">${orig(d)}</span></td>
+      <td class="price${d.est?' estp':''}">${d.est?'≈ ':''}${fmt(s)}<span class="orig">${orig(d)}</span>${d.camp?`<span class="camp">KAMPANJ ${d.camp}</span>`:''}</td>
       <td class="hide-sm"><div class="barwrap"><div class="bar" style="width:${20+pct*0.8}%"></div></div></td>
       <td><div class="rate">${stars(d.rating)}<span class="num">${d.rating?d.rating.toFixed(1)+'/5'+(d.count?' · '+d.count.toLocaleString('sv-SE')+' omd.':''):''}</span></div></td>
       <td class="hide-sm"><span class="tag ${d.est?'est':d.type}">${d.est?'≈ Riktpris':tagTxt[d.type]}</span></td>
