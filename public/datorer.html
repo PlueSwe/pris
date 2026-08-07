@@ -107,17 +107,20 @@ const configs = [
     ]
   },
   {
-    id:"max128", prod:"Mac Studio", chip:"M4 Max", ram:"128 GB",
-    note:"M4 Max-minnesnivåer: 36/48/64/128 GB — ”minst 96” betyder därför 128 GB, som kräver 16-kärnig CPU/40-kärnig GPU. Kedjebutikerna säljer bara basmodellen 36 GB (NetOnNet 26 490 kr) som inte uppfyller kravet.",
+    id:"max128", prod:"Mac Studio", chip:"M4 Max", ram:"128 GB", used:true, subLabel:"slut nytt",
+    banner:"⚠️ <b>M4 Max 128 GB är i praktiken slut överallt.</b> Apple har tagit bort alternativet ur konfiguratorn (DRAM-bristen — max är nu 36/64 GB på M4 Max), Macforum är ”Ej i lager” och MacRent anger utgått. Vill du ha ≥ 96 GB i en ny Mac Studio är <b>M3 Ultra 96 GB</b> enda köpbara vägen — annars gäller restlager/begagnat.",
+    note:"M4 Max hade nivåerna 36/48/64/128 GB innan neddragningen. Verifierat 2026-08-07: Apple.se listar inte längre 128 GB; Macforum tar ev. specialorder utan leveranstid; MacRent 0 st.",
     offers:[
-      {shop:"🇸🇪 Apple.se", spec:"16-k/40-GPU · 128 GB · 512 GB (BTO)", price:67995, approx:true, tag:["t-info","BTO beräknat"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
-      {shop:"🇸🇪 Macforum", spec:"16-k/40-GPU · 128 GB · 1 TB", price:70695, tag:["t-ok","bekräftat"], url:"https://macforum.se/products/mac-studio-m4-max-16-core-cpu-40-core-gpu-128gb-ram-1tb-ssd"},
-      {shop:"🇸🇪 MacRent", spec:"16-k/40-GPU · 128 GB · 1 TB", price:70700, approx:true, tag:["t-ok","i lager"], url:"https://www.macrent.se/produkter/stationar-mac/mac-studio/mac-studio-m4-max-16-core-grafik-40-core-128gb-1tb-ssd-mr15307/"},
+      {shop:"🇸🇪 Macforum", spec:"16-k/40-GPU · 128 GB · 1 TB · specialorder", price:70695, tag:["t-warn","EJ I LAGER · ev. order"], url:"https://macforum.se/products/mac-studio-m4-max-16-core-cpu-40-core-gpu-128gb-ram-1tb-ssd"},
+      {shop:"🇸🇪 Apple.se", spec:"128 GB borttaget ur konfiguratorn", price:null, tag:["t-out","säljs ej längre"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
+      {shop:"🇸🇪 MacRent", spec:"16-k/40-GPU · 128 GB · 1 TB", price:null, tag:["t-out","utgått · 0 st"], url:"https://www.macrent.se/produkter/stationar-mac/mac-studio/mac-studio-m4-max-16-core-grafik-40-core-128gb-1tb-ssd-mr15307/"},
+      {shop:"🇸🇪 Blocket / Tradera", spec:"begagnat inrikes — sök live", price:null, tag:["t-used","varierar"], url:"https://www.blocket.se/annonser/hela_sverige?q=mac%20studio%20m4%20max%20128"},
+      {shop:"🇪🇺 eBay.de", spec:"begagnat/open-box EU — sök live", price:null, tag:["t-used","varierar"], url:"https://www.ebay.de/sch/i.html?_nkw=mac+studio+m4+max+128gb&_sop=15"},
     ]
   },
   {
     id:"ultra96", prod:"Mac Studio", chip:"M3 Ultra", ram:"96 GB",
-    note:"Största M3 Ultra-konfiguration som fortfarande säljs ny (28-k CPU/60-GPU som standard). Macforums variant har det större 32-k/80-chippet — därav högre pris.",
+    note:"Största M3 Ultra-konfiguration som fortfarande säljs ny (28-k CPU/60-GPU som standard) — och efter att M4 Max 128 GB försvann är detta ENDA sättet att köpa en ny Mac Studio med ≥ 96 GB minne. Macforums variant har det större 32-k/80-chippet — därav högre pris.",
     offers:[
       {shop:"🇸🇪 Scandinavian Photo", spec:"28-k/60-GPU · 96 GB · 1 TB", price:69990, tag:["t-ok","nytt"], url:"https://www.scandinavianphoto.se/dator/stationara-datorer/mac-studio"},
       {shop:"🇸🇪 Apple.se", spec:"28-k/60-GPU · 96 GB · 1 TB", price:69995, tag:["t-ok","nytt, i lager"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
@@ -161,7 +164,7 @@ function render(){
     return `<button class="cfg ${c.id===active?'active':''} ${c.used?'used':''}" data-id="${c.id}">
       <div class="prod">${c.prod}</div>
       <div class="ram">${c.ram}</div>
-      <div class="chip">${c.chip}${c.used?' · begagnat':''}</div>
+      <div class="chip">${c.chip}${c.used?' · '+(c.subLabel||'begagnat'):''}</div>
       <div class="from">från ${fmt(cheapest)}</div>
     </button>`;
   }).join("");
