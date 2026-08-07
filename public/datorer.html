@@ -97,12 +97,16 @@ const fmt = n => n.toLocaleString("sv-SE") + " kr";
 const configs = [
   {
     id:"mini48", prod:"Mac mini", chip:"M4 Pro", ram:"48 GB",
-    note:"Mac mini M4 Pro finns i 24/48 GB — kravet 48 GB är byggd-på-beställning (BTO). Kedjebutikerna (NetOnNet, Power, Elgiganten, Webhallen, Komplett m.fl.) säljer bara 24 GB-standarden och kan inte leverera 48 GB. Apples påslag: +48 GB = +7 800 kr, 14-kärnig CPU = +2 600 kr.",
+    note:"M4 Pro-minnesnivåer: 24 / 48 / 64 GB — 64 GB finns också och överträffar kravet (MacRent från 33 995 kr). 48 GB är beställningsvara: kedjebutikerna (NetOnNet, Power, Elgiganten, Webhallen, Komplett) lagerför bara 24 GB-standarden. MacRent listar 20 varianter (alla ”kan beställas”, 0 i lager); 10 Gigabit Ethernet kostar +1 300 kr på samtliga. Apples påslag: +48 GB = +7 800 kr, 14-k CPU = +2 600 kr.",
     offers:[
       {shop:"🇸🇪 Apple.se", spec:"12-k CPU · 48 GB · 512 GB", price:28795, tag:["t-ok","bekräftat"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
+      {shop:"🇸🇪 MacRent", spec:"12-k CPU · 48 GB · 512 GB (+10Gbit: 30 095)", price:28795, tag:["t-info","kan beställas"], url:"https://www.macrent.se/produkter/stationar-mac/mac-mini/m4-pro/"},
       {shop:"🇸🇪 Macforum", spec:"12-k · bygg till 48 GB · 512 GB (BTO)", price:28795, approx:true, tag:["t-info","specialorder"], url:"https://macforum.se/products/mac-mini-m4-pro-mcx44ks-a"},
       {shop:"🇸🇪 Apple.se", spec:"14-k CPU · 48 GB · 512 GB", price:31395, tag:["t-ok","bekräftat"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
-      {shop:"🇸🇪 MacRent", spec:"14-k CPU · 48 GB · 512 GB", price:31395, tag:["t-ok","i lager"], url:"https://www.macrent.se/produkter/stationar-mac/mac-mini/m4-pro/"},
+      {shop:"🇸🇪 MacRent", spec:"14-k CPU · 48 GB · 512 GB (+10Gbit: 32 695)", price:31395, tag:["t-info","kan beställas"], url:"https://www.macrent.se/produkter/stationar-mac/mac-mini/m4-pro/"},
+      {shop:"🇸🇪 MacRent", spec:"12-k CPU · 48 GB · 1 TB", price:32695, tag:["t-info","kan beställas"], url:"https://www.macrent.se/produkter/stationar-mac/mac-mini/m4-pro/"},
+      {shop:"🇸🇪 MacRent", spec:"12-k CPU · 64 GB · 512 GB — över kravet", price:33995, tag:["t-info","kan beställas"], url:"https://www.macrent.se/produkter/stationar-mac/mac-mini/m4-pro/"},
+      {shop:"🇸🇪 MacRent", spec:"14-k CPU · 48 GB · 1 TB", price:35295, tag:["t-info","kan beställas"], url:"https://www.macrent.se/produkter/stationar-mac/mac-mini/m4-pro/"},
       {shop:"🇸🇪 Inet", spec:"12-k CPU · 48 GB · 512 GB", price:null, tag:["t-out","utgått"], url:"https://www.inet.se/produkt/2227190/apple-mac-mini-m4-pro-48gb-512gb"},
     ]
   },
