@@ -1,0 +1,32 @@
+name: Deploy till FTP
+
+# Kör vid varje push till main, en gång per dygn (05:00 UTC), samt manuellt.
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 5 * * *'   # dagligen 05:00 UTC (~07:00 svensk sommartid)
+  workflow_dispatch:       # gör att du kan köra den manuellt från Actions-fliken
+
+concurrency:
+  group: ftp-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checka ut repot
+        uses: actions/checkout@v4
+
+      - name: Ladda upp public/ via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
+          server-dir: ${{ vars.FTP_SERVER_DIR || './' }}
+          local-dir: ./public/
+          # state-fil så att endast ändrade filer laddas upp (snabbare deploys)
+          dangerous-clean-slate: false

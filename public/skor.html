@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hoka Clifton 10 – Pris-dashboard (EU 41⅓)</title>
+<style>
+  :root{
+    --bg:#f4f6fb; --panel:#ffffff; --panel2:#f0f3f9; --line:#e2e7f0;
+    --text:#1b2330; --muted:#5f6b7d; --accent:#2f6bff; --accent2:#7c5cff;
+    --good:#1c8c3b; --warn:#b9820a; --bad:#d23b34; --neutral:#8a95a6;
+    --shadow:0 6px 24px rgba(40,60,100,.10);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:radial-gradient(1200px 600px at 10% -10%,#e8eefb 0,var(--bg) 55%); color:var(--text);
+    padding:28px 18px 60px;
+  }
+  .wrap{max-width:1080px;margin:0 auto}
+  header h1{margin:0 0 4px;font-size:26px;letter-spacing:.2px}
+  header p{margin:0;color:var(--muted);font-size:14px}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 22px}
+  .pill{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:12.5px;color:var(--muted)}
+  .pill b{color:var(--text)}
+  .pill .ctrl{background:transparent;border:none;color:var(--accent);font-size:12.5px;width:56px}
+  .modelbar{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+  .modelbar .lbl{font-size:13px;color:var(--muted);margin-right:2px}
+  .modelbar .ghost{padding:8px 16px;font-weight:600}
+  .banner{background:linear-gradient(180deg,#fff6e0,#fdeecb);border:1px solid #f0d79a;color:#6b4e0a;border-radius:12px;padding:12px 15px;font-size:13px;margin-bottom:18px;line-height:1.5}
+  .banner b{color:#5a3f00}
+  .tag.est{background:rgba(185,130,10,.16);color:#9a6b06}
+  .price.estp{color:var(--warn)}
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+  .card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow)}
+  .card .k{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+  .card .v{font-size:22px;font-weight:700;margin-top:6px}
+  .card .s{font-size:12px;color:var(--muted);margin-top:2px}
+  .toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+  .toolbar .grow{flex:1}
+  button.act{background:var(--accent);color:#04121f;border:none;border-radius:9px;padding:9px 14px;font-weight:600;cursor:pointer;font-size:13px}
+  button.ghost{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:9px 14px;cursor:pointer;font-size:13px}
+  button.ghost.active{border-color:var(--accent);color:var(--accent)}
+  table{width:100%;border-collapse:separate;border-spacing:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+  thead th{font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);text-align:left;padding:13px 14px;background:var(--panel2);border-bottom:1px solid var(--line)}
+  tbody td{padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:middle;font-size:14px}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:#eef2fb}
+  .rank{font-weight:700;color:var(--muted);width:34px}
+  .rank.first{color:#ffd24a}
+  .shop{font-weight:600}
+  .shop .dom{display:block;color:var(--muted);font-size:11.5px;font-weight:400}
+  .price{font-weight:700;font-size:15px;white-space:nowrap}
+  .price .orig{display:block;font-weight:400;color:var(--muted);font-size:11.5px}
+  .barwrap{height:8px;background:#e6eaf2;border-radius:6px;overflow:hidden;min-width:90px}
+  .bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+  .rate{display:flex;flex-direction:column;gap:2px;min-width:120px}
+  .stars{font-size:13px;letter-spacing:1px}
+  .rate .num{font-size:12px;color:var(--muted)}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.4px}
+  .tag.official{background:rgba(79,157,255,.15);color:#7db8ff}
+  .tag.compare{background:rgba(124,92,255,.16);color:#b4a3ff}
+  .tag.shop{background:rgba(46,160,67,.15);color:#5dd47a}
+  .tag.warn{background:rgba(229,83,75,.16);color:#ff8a82}
+  a.go{color:var(--accent);text-decoration:none;font-weight:600;font-size:13px;white-space:nowrap}
+  a.go:hover{text-decoration:underline}
+  .spark{display:block}
+  .secondary{margin-top:26px}
+  .secondary h2{font-size:15px;margin:0 0 10px;color:var(--text)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:13px}
+  .chip a{color:var(--accent);text-decoration:none}
+  .chip .r{color:var(--muted);font-size:11.5px}
+  footer{margin-top:28px;color:var(--muted);font-size:12px;line-height:1.6}
+  footer code{background:var(--panel);padding:2px 6px;border-radius:5px;border:1px solid var(--line)}
+  @media(max-width:760px){
+    .cards{grid-template-columns:repeat(2,1fr)}
+    .hide-sm{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p style="margin:0 0 14px"><a href="index.html" style="color:#2f6bff;text-decoration:none;font-weight:600;font-size:14px">← Fyndguiden — start</a></p>
+  <header>
+    <h1>👟 Hoka Clifton 10 &amp; 11 — Pris-dashboard</h1>
+    <p>Storlek <b>EU 41⅓</b> · sorterad billigast → dyrast · betyg per butik · ögonblicksbild <b id="snapDate"></b></p>
+  </header>
+
+  <div class="meta">
+    <span class="pill">Kurs <b>1 € = <input id="rate" class="ctrl" type="number" step="0.1" value="11.4"></b> kr</span>
+    <span class="pill">Kurs <b>1 £ = <input id="rateGbp" class="ctrl" type="number" step="0.1" value="13.4"></b> kr</span>
+    <span class="pill">Priser uppdaterade <b>2026-08-07</b></span>
+    <span class="pill">Betyg: <b>Trustpilot</b> (där angivet)</span>
+    <span class="pill" id="lowPill"></span>
+  </div>
+
+  <div class="modelbar">
+    <span class="lbl">Modell:</span>
+    <button class="ghost active" data-model="Clifton 10">Clifton 10</button>
+    <button class="ghost" data-model="Clifton 11">Clifton 11</button>
+    <button class="ghost" data-model="Alla">Alla</button>
+  </div>
+
+  <div id="banner" class="banner" style="display:none"></div>
+
+  <div class="cards" id="cards"></div>
+
+  <div class="toolbar">
+    <button class="ghost active" data-sort="price">Sortera: pris ↑</button>
+    <button class="ghost" data-sort="priceDesc">pris ↓</button>
+    <button class="ghost" data-sort="rating">betyg ↓</button>
+    <span class="grow"></span>
+    <button class="act" id="saveBtn">📌 Spara dagens priser</button>
+    <button class="ghost" id="clearBtn">Rensa historik</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Butik</th>
+        <th>Pris (41⅓)</th>
+        <th class="hide-sm">Prisnivå</th>
+        <th>Betyg</th>
+        <th class="hide-sm">Typ</th>
+        <th class="hide-sm">Trend</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <div class="secondary">
+    <h2>Fler butiker som säljer Clifton 10 (pris ej hämtat ännu)</h2>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <footer>
+    <p><b>Så funkar pristrenden:</b> Klicka <b>📌 Spara dagens priser</b> för att lagra en ögonblicksbild lokalt (i din webbläsare via localStorage). Nästa gång priserna ändras: uppdatera siffrorna i <code>data</code>-listan högst upp i denna fil, öppna sidan och spara igen — minigrafen i kolumnen <b>Trend</b> växer för varje sparad dag.</p>
+    <p><b>Obs:</b> Priser är en ögonblicksbild från mina webbsökningar 2026-06-29 och kan ändras. Prisjämförelsesajter (Runnea, Geizhals, Idealo) visar lägsta listpris från flera handlare, inte en egen butik. Sprinter har lågt Trustpilot-betyg (1,3) — beställ med försiktighet. Amerikanska butiker är medvetet uteslutna enligt önskemål.</p>
+  </footer>
+</div>
+
+<script>
+/* ====== REDIGERA HÄR: priser & betyg. priceSek används för svenska butiker,
+   annars räknas priceEur om med växelkursen ovan. ====== */
+const data = [
+  /* ===== CLIFTON 10 – bekräftade priser (ögonblicksbild 2026-06-29) ===== */
+  {model:"Clifton 10", name:"SportsShoes",    dom:"sportsshoes.com · rea AW25", flag:"🇬🇧", priceGbp:69.99, type:"shop", rating:null, count:null, url:"https://www.sportsshoes.com/product/hok2945/hoka-clifton-10-men's-running-shoes---aw25"},
+  {model:"Clifton 10", name:"Runnea",         dom:"runnea.com · prisjämf.",     flag:"🇪🇸", priceEur:104.99, type:"compare",  rating:null, count:null, url:"https://www.runnea.com/zapatillas-running/hoka/clifton-10/1043777/precios/todas/"},
+  {model:"Clifton 10", name:"Geizhals",       dom:"geizhals.de · prisjämf.",    flag:"🇩🇪", priceEur:99.50,  type:"compare",  rating:null, count:null, url:"https://geizhals.de/hoka-clifton-10-herren-v197431.html"},
+  {model:"Clifton 10", name:"Idealo",         dom:"idealo.es · prisjämf.",      flag:"🇪🇸", priceEur:99.92,  type:"compare",  rating:null, count:null, url:"https://www.idealo.es/precios/206295585/hoka-clifton-10-1162030.html"},
+  {model:"Clifton 10", name:"Vigliettisport", dom:"vigliettisport.com · -25%",  flag:"🇮🇹", priceEur:119.00, type:"shop",     rating:null, count:null, url:"https://www.vigliettisport.com/it/1095-sport/1159-running-e-trail/1670-scarpe-strada/56524-scarpe-clifton-10-running.html"},
+  {model:"Clifton 10", name:"Deporvillage",   dom:"deporvillage.com",           flag:"🇪🇸", priceEur:119.95, type:"shop",     rating:4.4,  count:451000, url:"https://www.deporvillage.com/zapatillas-hoka-clifton-10-negro-blanco"},
+  {model:"Clifton 10", name:"Bergfreunde",    dom:"bergfreunde.de · -30%",      flag:"🇩🇪", priceEur:111.97, type:"shop",     rating:5.0,  count:9718, url:"https://www.bergfreunde.de/hoka-clifton-10-runningschuhe/"},
+  {model:"Clifton 10", name:"Sprinter",       dom:"sprintersports.com",         flag:"🇪🇸", priceEur:129.99, type:"warn",     rating:1.3,  count:688, url:"https://www.sprintersports.com/hoka-clifton"},
+  {model:"Clifton 10", name:"Passsport",      dom:"passsport.it",               flag:"🇮🇹", priceEur:144.00, type:"shop",     rating:null, count:null, url:"https://www.passsport.it/hoka-clifton-10-20545"},
+  {model:"Clifton 10", name:"Löparshop",      dom:"loparshop.se",               flag:"🇸🇪", priceSek:1385,   type:"shop",     rating:4.7,  count:357, url:"https://www.loparshop.se/hoka-men-s-clifton-10-1162030-bblc.html"},
+  {model:"Clifton 10", name:"Outnorth",       dom:"outnorth.com · rea",         flag:"🇸🇪", priceSek:1469,   type:"shop",     rating:2.5,  count:null, url:"https://www.outnorth.com/se/varumarken/hoka/hoka-men-s-clifton-10-black-white-FS592025"},
+  {model:"Clifton 10", name:"RunningDirect",  dom:"runningdirect.se · rea",     flag:"🇸🇪", priceSek:1499,   type:"shop",     rating:null, count:null, url:"https://www.runningdirect.se/hoka-clifton-10-herr-1162030-nmd"},
+  {model:"Clifton 10", name:"The Running Company", dom:"therunningcompany.se · rea", flag:"🇸🇪", priceSek:1490, type:"shop", rating:null, count:null, url:"https://www.therunningcompany.se/products/hoka-m-clifton-10-rnn"},
+  {model:"Clifton 10", name:"Zalando",        dom:"zalando.de",                 flag:"🇩🇪", priceEur:159.95, type:"shop",     rating:1.9,  count:null, url:"https://www.zalando.de/hoka-clifton-10-laufschuh-strasse-black-h1x42a01t-q11.html"},
+  {model:"Clifton 10", name:"HOKA (officiell)",dom:"hoka.com",                  flag:"🏳️", priceEur:160.00, type:"official", rating:null, count:null, url:"https://www.hoka.com/de/de/clifton-10/"},
+  {model:"Clifton 10", name:"Zalando",        dom:"zalando.se",                 flag:"🇸🇪", priceSek:1728,   type:"shop",     rating:1.9,  count:null, url:"https://www.zalando.se/hoka-clifton-10-vaegloeparskor-blackwhite-h1x41a01k-q12.html"},
+  {model:"Clifton 10", name:"Intersport",     dom:"intersport.se",              flag:"🇸🇪", priceSek:2099,   type:"shop",     rating:null, count:null, url:"https://www.intersport.se/skor/loparskor/neutral/hoka-one-one-clifton-10-m-loparskor-herr/black-white"},
+
+  /* ===== CLIFTON 11 – nyss släppt, redan live hos flera butiker (RRP, inga rabatter än).
+     Bekräftade priser hämtade 2026-06-29. est:true = ej bekräftat pris (riktpris). ===== */
+  {model:"Clifton 11", name:"Bergfreunde",    dom:"bergfreunde.de",             flag:"🇩🇪", priceEur:159.95, type:"shop", rating:5.0,  count:9718, url:"https://www.bergfreunde.de/hoka-clifton-11-runningschuhe/"},
+  {model:"Clifton 11", name:"Zalando",        dom:"zalando.de",                 flag:"🇩🇪", priceEur:159.95, type:"shop", rating:1.9,  count:null, url:"https://www.zalando.de/sports-sortiment/hoka/?q=hoka+clifton+11"},
+  {model:"Clifton 11", name:"HOKA (officiell)",dom:"hoka.com · RRP",            flag:"🏳️", priceEur:160.00, type:"official", rating:null, count:null, url:"https://www.hoka.com/de/de/herren-strasse/clifton-11/1176572.html"},
+  {model:"Clifton 11", name:"Intersport",     dom:"intersport.se",              flag:"🇸🇪", priceSek:1999,  type:"shop", rating:null, count:null, url:"https://www.intersport.se/products/hoka-one-one-clifton-11-m-loparskor-herr/frost-black-162601604"},
+  {model:"Clifton 11", name:"The Running Company", dom:"therunningcompany.se",  flag:"🇸🇪", priceSek:1999,  type:"shop", rating:null, count:null, url:"https://www.therunningcompany.se/products/hoka-m-clifton-11-flck"},
+  {model:"Clifton 11", est:true, name:"Löparshop",   dom:"loparshop.se · ej bekräftat", flag:"🇸🇪", priceSek:1999, type:"shop", rating:4.7, count:357, url:"https://www.loparshop.se/hoka-men-s-clifton-11-h1176572-bblc.html"},
+  {model:"Clifton 11", name:"SportsShoes", dom:"sportsshoes.com · RRP", flag:"🇬🇧", priceGbp:139.99, type:"shop", rating:null, count:null, url:"https://www.sportsshoes.com/store/hoka-clifton"},
+];
+
+/* Butiker där pris ej kunde hämtas (sidan blockerade/JS-renderat) – visas som chips */
+const more = [
+  {name:"lauf-bar",      flag:"🇩🇪", rating:4.9, src:"eKomi · pris ej hämtat", url:"https://www.lauf-bar.de/p/hoka-clifton-10-herren-laufschuhe"},
+  {name:"21RUN",         flag:"🇸🇪", rating:2.4, src:"Trustpilot · pris ej hämtat", url:"https://21run.com/se/hoka-clifton-10-herr-1162030-hsk"},
+  {name:"Trovaprezzi",   flag:"🇮🇹", rating:null, src:"prisjämförelse", url:"https://www.trovaprezzi.it/prezzo_scarpe-sportive_scarpa_hoka_clifton_10.aspx"},
+];
+
+const HKEY="hokaClifton10History";
+const today=new Date().toISOString().slice(0,10);
+document.getElementById("snapDate").textContent="("+today+")";
+
+const fmt=n=>n.toLocaleString("sv-SE")+" kr";
+function sek(d){
+  const r=parseFloat(document.getElementById("rate").value)||11.4;
+  const g=parseFloat(document.getElementById("rateGbp").value)||13.4;
+  if(d.priceSek!=null) return d.priceSek;
+  if(d.priceGbp!=null) return Math.round(d.priceGbp*g);
+  return Math.round(d.priceEur*r);
+}
+function orig(d){
+  if(d.priceSek!=null) return fmt(d.priceSek);
+  if(d.priceGbp!=null) return d.priceGbp.toFixed(2)+" £";
+  return d.priceEur.toFixed(2)+" €";
+}
+
+function stars(r){
+  if(r==null) return '<span class="num">— inget betyg</span>';
+  const full=Math.round(r);
+  const s="★★★★★".slice(0,full)+"☆☆☆☆☆".slice(0,5-full);
+  const col=r>=4?"var(--good)":r>=3?"var(--warn)":"var(--bad)";
+  return `<span class="stars" style="color:${col}">${s}</span>`;
+}
+
+function loadHist(){try{return JSON.parse(localStorage.getItem(HKEY))||{}}catch(e){return{}}}
+function saveSnapshot(){
+  const h=loadHist();
+  data.forEach(d=>{const k=d.dom; h[k]=h[k]||[];
+    h[k]=h[k].filter(p=>p.date!==today); h[k].push({date:today,sek:sek(d)});});
+  localStorage.setItem(HKEY,JSON.stringify(h)); render();
+}
+function sparkline(d){
+  const h=loadHist()[d.dom]||[];
+  const pts=[...h]; const cur=sek(d);
+  if(!pts.some(p=>p.date===today)) pts.push({date:today,sek:cur});
+  if(pts.length<2) return '<span class="num">spara för att börja</span>';
+  const w=70,ht=22,vals=pts.map(p=>p.sek),mn=Math.min(...vals),mx=Math.max(...vals),rng=mx-mn||1;
+  const step=w/(pts.length-1);
+  const coords=pts.map((p,i)=>`${(i*step).toFixed(1)},${(ht-((p.sek-mn)/rng)*ht).toFixed(1)}`);
+  const up=pts[pts.length-1].sek>=pts[0].sek;
+  const col=up?"var(--bad)":"var(--good)";
+  return `<svg class="spark" width="${w}" height="${ht}"><polyline points="${coords.join(' ')}" fill="none" stroke="${col}" stroke-width="2"/></svg>`;
+}
+
+let sortMode="price", modelFilter="Clifton 10";
+function render(){
+  const set=data.filter(d=>modelFilter==="Alla"||d.model===modelFilter);
+  const rows=[...set];
+  if(sortMode==="price") rows.sort((a,b)=>sek(a)-sek(b));
+  if(sortMode==="priceDesc") rows.sort((a,b)=>sek(b)-sek(a));
+  if(sortMode==="rating") rows.sort((a,b)=>(b.rating||-1)-(a.rating||-1));
+
+  const prices=set.map(sek), lo=Math.min(...prices), hi=Math.max(...prices);
+  const avg=Math.round(prices.reduce((a,b)=>a+b,0)/prices.length);
+  const cheapest=set.find(d=>sek(d)===lo);
+  const bestRated=set.filter(d=>d.rating).sort((a,b)=>b.rating-a.rating)[0];
+
+  const hasEst=set.some(d=>d.est);
+  const banner=document.getElementById("banner");
+  if(hasEst){
+    banner.style.display="block";
+    banner.innerHTML=`ℹ️ <b>Clifton 11 är nyss släppt</b> och ligger på <b>fullpris (RRP)</b> hos butikerna — inga rabatter än, till skillnad från Clifton 10. De flesta priser är bekräftade 2026-06-29; rader märkta <b>≈ Riktpris</b> är ännu inte bekräftade.`;
+  } else banner.style.display="none";
+
+  document.getElementById("cards").innerHTML=`
+    <div class="card"><div class="k">Billigast</div><div class="v" style="color:var(--good)">${fmt(lo)}</div><div class="s">${cheapest.name} · ${cheapest.flag}</div></div>
+    <div class="card"><div class="k">Snittpris</div><div class="v">${fmt(avg)}</div><div class="s">${set.length} butiker · ${modelFilter}</div></div>
+    <div class="card"><div class="k">Dyrast</div><div class="v" style="color:var(--bad)">${fmt(hi)}</div><div class="s">spann ${fmt(hi-lo)}</div></div>
+    <div class="card"><div class="k">Bäst betyg</div><div class="v" style="color:var(--good)">${bestRated?bestRated.rating.toFixed(1)+'★':'—'}</div><div class="s">${bestRated?bestRated.name+' · '+bestRated.flag:'inga betyg'}</div></div>`;
+
+  document.getElementById("lowPill").innerHTML=`Lägsta: <b>${fmt(lo)}</b> hos ${cheapest.name}`;
+
+  const tagTxt={official:"Officiell",compare:"Prisjämf.",shop:"Butik",warn:"⚠ Lågt betyg"};
+  document.getElementById("rows").innerHTML=rows.map((d,i)=>{
+    const s=sek(d), pct=Math.round(((s-lo)/((hi-lo)||1))*100);
+    return `<tr>
+      <td class="rank ${i===0?'first':''}">${i+1}</td>
+      <td><span class="shop">${d.flag} ${d.name}</span><span class="dom">${d.dom}</span></td>
+      <td class="price${d.est?' estp':''}">${d.est?'≈ ':''}${fmt(s)}<span class="orig">${orig(d)}</span></td>
+      <td class="hide-sm"><div class="barwrap"><div class="bar" style="width:${20+pct*0.8}%"></div></div></td>
+      <td><div class="rate">${stars(d.rating)}<span class="num">${d.rating?d.rating.toFixed(1)+'/5'+(d.count?' · '+d.count.toLocaleString('sv-SE')+' omd.':''):''}</span></div></td>
+      <td class="hide-sm"><span class="tag ${d.est?'est':d.type}">${d.est?'≈ Riktpris':tagTxt[d.type]}</span></td>
+      <td class="hide-sm">${sparkline(d)}</td>
+      <td><a class="go" href="${d.url}" target="_blank" rel="noopener">Öppna →</a></td>
+    </tr>`;
+  }).join("");
+
+  document.getElementById("chips").innerHTML=more.map(m=>`
+    <div class="chip">${m.flag} <a href="${m.url}" target="_blank" rel="noopener">${m.name}</a>
+    <span class="r">${m.rating?' · '+m.rating.toFixed(1)+'★ '+(m.src||''):' · betyg saknas'}</span></div>`).join("");
+}
+
+document.querySelectorAll('[data-sort]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('[data-sort]').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); sortMode=b.dataset.sort; render();
+}));
+document.querySelectorAll('[data-model]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('[data-model]').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); modelFilter=b.dataset.model; render();
+}));
+document.getElementById("rate").addEventListener("input",render);
+document.getElementById("rateGbp").addEventListener("input",render);
+document.getElementById("saveBtn").addEventListener("click",saveSnapshot);
+document.getElementById("clearBtn").addEventListener("click",()=>{localStorage.removeItem(HKEY);render();});
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# Hemligheter – får ALDRIG committas (repot är publikt!)
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Diverse
+.DS_Store
+Thumbs.db
