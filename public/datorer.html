@@ -48,6 +48,9 @@
   .rank.first{color:#d8a200}
   .shop{font-weight:600}
   .spec{display:block;color:var(--muted);font-size:11.5px;font-weight:400}
+  .shoplink{text-decoration:none}
+  .shoplink .shop{color:var(--accent)}
+  .shoplink:hover .shop{text-decoration:underline}
   .price{font-weight:750;white-space:nowrap}
   .price .orig{display:block;font-weight:400;color:var(--muted);font-size:11.5px}
   .tag{display:inline-block;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.3px;white-space:nowrap}
@@ -202,7 +205,7 @@ function render(){
   const rowHtml = (o,i)=>`
     <tr>
       <td class="rank ${i===0&&o.price?'first':''}">${o.price?i+1:'–'}</td>
-      <td><span class="shop">${o.shop}</span><span class="spec">${o.spec}</span></td>
+      <td><a class="shoplink" href="${o.url}" target="_blank" rel="noopener"><span class="shop">${o.shop}</span></a><span class="spec">${o.spec}</span></td>
       <td class="price">${o.price?(o.approx?'≈ ':'')+fmt(o.price):'se sida'}${o.orig?`<span class="orig">${o.orig}</span>`:''}${o.camp?`<span class="camp">KAMPANJ ${o.camp}</span>`:''}${trendHtml(o)}</td>
       <td><span class="tag ${o.tag[0]}">${o.tag[1]}</span></td>
       <td class="hide-sm"><a class="go" href="${o.url}" target="_blank" rel="noopener">Öppna →</a></td>
