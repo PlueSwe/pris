@@ -60,6 +60,11 @@
   .t-used{background:rgba(124,92,255,.15);color:#6a4bd1}
   .t-out{background:rgba(210,59,52,.13);color:#d23b34}
   a.go{color:var(--accent);text-decoration:none;font-weight:600;white-space:nowrap;font-size:13px}
+  .chartbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px;margin-bottom:18px}
+  .chart-h{font-size:13px;color:var(--muted);margin-bottom:10px}
+  .chart-h b{color:var(--text)}
+  .chart-h span{color:var(--muted)}
+  .spark{display:block}
   .trend{display:block;font-size:11px;font-weight:600;margin-top:2px}
   .trend.flat{color:var(--muted)} .trend.down{color:var(--good)} .trend.up{color:var(--bad)}
   .camp{display:inline-block;background:#ffe9d6;color:#b45309;font-size:10px;font-weight:800;padding:2px 7px;border-radius:6px;letter-spacing:.3px;margin-top:3px}
@@ -85,8 +90,13 @@
   <div class="configs" id="configs"></div>
   <div class="banner" id="banner"></div>
 
+  <div class="chartbox">
+    <div class="chart-h"><b>Prisutveckling</b> — lägsta spårade pris för vald konfiguration <span id="chartMeta"></span></div>
+    <div id="chart"></div>
+  </div>
+
   <table>
-    <thead><tr><th>#</th><th>Butik</th><th>Pris</th><th>Status</th><th class="hide-sm"></th></tr></thead>
+    <thead><tr><th>#</th><th>Butik</th><th>Pris</th><th class="hide-sm">Trend</th><th>Status</th><th class="hide-sm"></th></tr></thead>
     <tbody id="rows"></tbody>
   </table>
   <p class="cfgnote" id="cfgnote"></p>
@@ -139,7 +149,7 @@ const configs = [
     id:"ultra96", prod:"Mac Studio", chip:"M3 Ultra", ram:"96 GB",
     note:"Största M3 Ultra-konfiguration som fortfarande säljs ny (28-k CPU/60-GPU som standard) — och efter att M4 Max 128 GB försvann är detta ENDA sättet att köpa en ny Mac Studio med ≥ 96 GB minne. Macforums variant har det större 32-k/80-chippet — därav högre pris.",
     offers:[
-      {shop:"🇸🇪 Scandinavian Photo", spec:"28-k/60-GPU · 96 GB · 1 TB", price:69990, tag:["t-ok","nytt"], url:"https://www.scandinavianphoto.se/dator/stationara-datorer/mac-studio"},
+      {shop:"🇸🇪 Scandinavian Photo", spec:"28-k/60-GPU · 96 GB · 1 TB", price:69990, hist:[["2026-08-05",69990],["2026-08-07",69990]], tag:["t-ok","nytt"], url:"https://www.scandinavianphoto.se/dator/stationara-datorer/mac-studio"},
       {shop:"🇸🇪 Apple.se", spec:"28-k/60-GPU · 96 GB · 1 TB", price:69995, hist:[["2026-08-05",69995],["2026-08-07",69995]], tag:["t-ok","nytt, i lager"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
       {shop:"🇸🇪 Dustin", spec:"28-k/60-GPU · 96 GB · 1 TB", price:69999, tag:["t-ok","nytt"], url:"https://www.dustin.se/product/5020044579/mac-studio-2025"},
       {shop:"🇸🇪 Inet", spec:"28-k/60-GPU · 96 GB · 1 TB", price:null, tag:["t-info","se sida"], url:"https://www.inet.se/produkt/2227062/apple-mac-studio-m3-ultra-96gb-1tb-60-karnig-grafik"},
@@ -173,6 +183,40 @@ const configs = [
   },
 ];
 
+/* Översiktsgraf: lägsta pris per datum över alla butiker i konfigurationen */
+function drawChart(c){
+  const all=[...(c.offers||[]),...(c.altOffers||[])].filter(o=>o.hist&&o.hist.length);
+  const byDate={};
+  all.forEach(o=>o.hist.forEach(([d,v])=>{ byDate[d]=byDate[d]==null?v:Math.min(byDate[d],v); }));
+  const dates=Object.keys(byDate).sort();
+  const el=document.getElementById("chart"), meta=document.getElementById("chartMeta");
+  if(dates.length<2){
+    el.innerHTML=`<div style="color:var(--muted);font-size:13px;padding:8px 0">
+      För få mätpunkter ännu — kurvan ritas när prishistoriken har minst två datum.
+      Priserna hämtas automatiskt varje dag, så grafen växer fram av sig själv.</div>`;
+    meta.textContent=""; return;
+  }
+  const vals=dates.map(d=>byDate[d]);
+  const mn=Math.min(...vals), mx=Math.max(...vals), rng=(mx-mn)||1;
+  const W=680,H=170,PL=64,PR=14,PT=14,PB=26, iw=W-PL-PR, ih=H-PT-PB;
+  const x=i=>PL+(dates.length===1?iw/2:(i*iw/(dates.length-1)));
+  const y=v=>PT+ih-((v-mn)/rng)*ih;
+  const pct=Math.round((vals[vals.length-1]-vals[0])/vals[0]*100);
+  const col=pct===0?'#5f6b7d':pct>0?'#d23b34':'#1c8c3b';
+  const line=dates.map((d,i)=>`${x(i).toFixed(1)},${y(byDate[d]).toFixed(1)}`).join(' ');
+  const area=`${PL},${PT+ih} ${line} ${x(dates.length-1).toFixed(1)},${PT+ih}`;
+  const dots=dates.map((d,i)=>`<circle cx="${x(i).toFixed(1)}" cy="${y(byDate[d]).toFixed(1)}" r="3.5" fill="${col}"/>`).join('');
+  const grid=[mx,(mx+mn)/2,mn].map(v=>`
+    <line x1="${PL}" y1="${y(v).toFixed(1)}" x2="${W-PR}" y2="${y(v).toFixed(1)}" stroke="#e2e7f0" stroke-width="1"/>
+    <text x="${PL-8}" y="${(y(v)+4).toFixed(1)}" text-anchor="end" font-size="10" fill="#5f6b7d">${Math.round(v).toLocaleString('sv-SE')}</text>`).join('');
+  const xlab=dates.map((d,i)=>(i===0||i===dates.length-1||dates.length<6)
+    ?`<text x="${x(i).toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="10" fill="#5f6b7d">${d.slice(5).replace('-','/')}</text>`:'').join('');
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" role="img" aria-label="Prisutveckling">
+    ${grid}<polygon points="${area}" fill="${col}" opacity=".08"/>
+    <polyline points="${line}" fill="none" stroke="${col}" stroke-width="2.5" stroke-linejoin="round"/>${dots}${xlab}</svg>`;
+  meta.innerHTML = ` · ${dates[0].slice(5).replace('-','/')}→idag: <b style="color:${col}">${pct===0?'oförändrat':(pct>0?'+':'')+pct+' %'}</b> (${fmt(vals[0])} → ${fmt(vals[vals.length-1])})`;
+}
+
 let active = "mini48";
 
 function render(){
@@ -202,22 +246,33 @@ function render(){
     return pct<0 ? `<span class="trend down">↘ ${pct} % sedan ${since}</span>`
                  : `<span class="trend up">↗ +${pct} % sedan ${since}</span>`;
   };
+  const sparkHtml = o=>{
+    if(!o.hist || o.hist.length<2) return '<span class="trend flat">—</span>';
+    const vals=o.hist.map(h=>h[1]), mn=Math.min(...vals), mx=Math.max(...vals), rng=mx-mn||1;
+    const w=74, ht=24, step=w/(o.hist.length-1);
+    const pts=o.hist.map((h,i)=>`${(i*step).toFixed(1)},${(ht-((h[1]-mn)/rng)*ht).toFixed(1)}`).join(' ');
+    const pct=Math.round((vals[vals.length-1]-vals[0])/vals[0]*100);
+    const col=pct===0?'var(--muted)':pct>0?'var(--bad)':'var(--good)';
+    return `<svg class="spark" width="${w}" height="${ht}"><polyline points="${pts}" fill="none" stroke="${col}" stroke-width="2"/></svg>`;
+  };
   const rowHtml = (o,i)=>`
     <tr>
       <td class="rank ${i===0&&o.price?'first':''}">${o.price?i+1:'–'}</td>
       <td><a class="shoplink" href="${o.url}" target="_blank" rel="noopener"><span class="shop">${o.shop}</span></a><span class="spec">${o.spec}</span></td>
       <td class="price">${o.price?(o.approx?'≈ ':'')+fmt(o.price):'se sida'}${o.orig?`<span class="orig">${o.orig}</span>`:''}${o.camp?`<span class="camp">KAMPANJ ${o.camp}</span>`:''}${trendHtml(o)}</td>
+      <td class="hide-sm">${sparkHtml(o)}</td>
       <td><span class="tag ${o.tag[0]}">${o.tag[1]}</span></td>
       <td class="hide-sm"><a class="go" href="${o.url}" target="_blank" rel="noopener">Öppna →</a></td>
     </tr>`;
   const sorted = [...c.offers].sort((a,b)=>(a.price??Infinity)-(b.price??Infinity));
   let html = sorted.map(rowHtml).join("");
   if(c.altOffers){
-    html += `<tr><td colspan="5" style="background:#f5f8ff;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#2f6bff;font-weight:700;padding:8px 14px">${c.altTitle}</td></tr>`;
+    html += `<tr><td colspan="6" style="background:#f5f8ff;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#2f6bff;font-weight:700;padding:8px 14px">${c.altTitle}</td></tr>`;
     html += [...c.altOffers].sort((a,b)=>(a.price??Infinity)-(b.price??Infinity)).map(rowHtml).join("");
   }
   document.getElementById("rows").innerHTML = html;
 
+  drawChart(c);
   document.getElementById("cfgnote").innerHTML = "ℹ️ " + c.note;
 }
 render();
