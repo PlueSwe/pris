@@ -97,7 +97,8 @@
   <div class="meta">
     <span class="pill">Kurs <b>1 € = <input id="rate" class="ctrl" type="number" step="0.1" value="11.4"></b> kr</span>
     <span class="pill">Kurs <b>1 £ = <input id="rateGbp" class="ctrl" type="number" step="0.1" value="13.4"></b> kr</span>
-    <span class="pill">Priser uppdaterade <b>2026-08-07</b></span>
+    <span class="pill">Sidan senast ändrad <b>2026-08-12</b></span>
+    <span class="pill" title="Varje butik kontrolleras vid olika tillfällen — se trendkurvan för mätdatum">Priser kontrollerade <b>löpande</b> per butik</span>
     <span class="pill">Betyg: <b>Trustpilot</b> (där angivet)</span>
     <span class="pill" id="lowPill"></span>
   </div>
@@ -150,7 +151,7 @@
 
   <footer>
     <p><b>Så funkar pristrenden:</b> Klicka <b>📌 Spara dagens priser</b> för att lagra en ögonblicksbild lokalt (i din webbläsare via localStorage). Nästa gång priserna ändras: uppdatera siffrorna i <code>data</code>-listan högst upp i denna fil, öppna sidan och spara igen — minigrafen i kolumnen <b>Trend</b> växer för varje sparad dag.</p>
-    <p><b>Obs:</b> Priser är en ögonblicksbild från mina webbsökningar 2026-06-29 och kan ändras. Prisjämförelsesajter (Runnea, Geizhals, Idealo) visar lägsta listpris från flera handlare, inte en egen butik. Sprinter har lågt Trustpilot-betyg (1,3) — beställ med försiktighet. Amerikanska butiker är medvetet uteslutna enligt önskemål.</p>
+    <p><b>Obs:</b> Varje butik kontrolleras vid olika tillfällen — trendkurvan visar mätdatum per butik. Äldsta mätning i datan är 2026-06-29, och priser kan alltid ha hunnit ändras sedan senaste kontrollen. Prisjämförelsesajter (Runnea, Geizhals, Idealo) visar lägsta listpris från flera handlare, inte en egen butik. Sprinter har lågt Trustpilot-betyg (1,3) — beställ med försiktighet. Amerikanska butiker är medvetet uteslutna enligt önskemål.</p>
   </footer>
 </div>
 
@@ -250,7 +251,8 @@ function sparkline(d){
   const pctv=Math.round((pts[pts.length-1].sek-pts[0].sek)/pts[0].sek*100);
   const up=pctv>0, col=pctv===0?"var(--muted)":up?"var(--bad)":"var(--good)";
   const lbl=(pctv===0?'±0':(up?'+':'')+pctv)+' % sedan '+pts[0].date.slice(5).replace('-','/');
-  return `<svg class="spark" width="${w}" height="${ht}"><polyline points="${coords.join(' ')}" fill="none" stroke="${col}" stroke-width="2"/></svg><span class="num" style="color:${col}">${lbl}</span>`;
+  const tip=pts.map(p=>p.date+': '+fmt(p.sek)).join('\n');
+  return `<svg class="spark" width="${w}" height="${ht}"><title>${tip}</title><polyline points="${coords.join(' ')}" fill="none" stroke="${col}" stroke-width="2"/></svg><span class="num" style="color:${col}" title="${tip}">${lbl}</span>`;
 }
 
 /* Översiktsgraf: lägsta pris per datum över alla butiker för vald modell.
@@ -310,7 +312,7 @@ function render(){
   const banner=document.getElementById("banner");
   if(hasEst){
     banner.style.display="block";
-    banner.innerHTML=`ℹ️ <b>Clifton 11 är nyss släppt</b> och ligger på <b>fullpris (RRP)</b> hos butikerna — inga rabatter än, till skillnad från Clifton 10. De flesta priser är bekräftade 2026-06-29; rader märkta <b>≈ Riktpris</b> är ännu inte bekräftade.`;
+    banner.innerHTML=`ℹ️ <b>Clifton 11 är nyss släppt</b> och ligger på <b>fullpris (RRP)</b> hos butikerna — inga rabatter än, till skillnad från Clifton 10. Rader märkta <b>≈ Riktpris</b> är ännu inte bekräftade mot butikens sida.`;
   } else banner.style.display="none";
 
   document.getElementById("cards").innerHTML=`

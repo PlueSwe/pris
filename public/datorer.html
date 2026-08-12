@@ -82,7 +82,8 @@
   <p class="sub">Välj en konfiguration — butikspriser visas billigast först. Alla priser <b>inkl. moms</b>, leverans Sverige/EU.</p>
 
   <div class="meta">
-    <span class="pill">Uppdaterad <b>2026-08-07</b></span>
+    <span class="pill">Sidan senast ändrad <b>2026-08-12</b></span>
+    <span class="pill" title="Varje butik kontrolleras vid olika tillfällen — se trendkurvan för mätdatum">Priser kontrollerade <b>löpande</b> per butik</span>
     <span class="pill">Kurs <b>1 € ≈ 11,4 kr</b></span>
     <span class="pill">Krav: mini <b>48 GB</b> · Studio <b>≥ 96 GB</b></span>
   </div>
@@ -102,7 +103,7 @@
   <p class="cfgnote" id="cfgnote"></p>
 
   <footer>
-    <p>Bekräftade priser avlästa 2026-08-05→07. "≈" = omräknat från EUR eller beräknat BTO-pris. Begagnatpriser (eBay) ändras dagligen — endast säljare med gediget track record listas; misstänkt billiga annonser är exkluderade.</p>
+    <p>Priserna kontrolleras butik för butik vid olika tillfällen — hovra över en trendkurva för att se vilka datum just den butiken mätts. Äldsta mätning i datan är 2026-08-05. "≈" = omräknat från EUR eller beräknat BTO-pris. Begagnatpriser (eBay) ändras dagligen — endast säljare med gediget track record listas; misstänkt billiga annonser är exkluderade.</p>
   </footer>
 </div>
 
@@ -253,7 +254,8 @@ function render(){
     const pts=o.hist.map((h,i)=>`${(i*step).toFixed(1)},${(ht-((h[1]-mn)/rng)*ht).toFixed(1)}`).join(' ');
     const pct=Math.round((vals[vals.length-1]-vals[0])/vals[0]*100);
     const col=pct===0?'var(--muted)':pct>0?'var(--bad)':'var(--good)';
-    return `<svg class="spark" width="${w}" height="${ht}"><polyline points="${pts}" fill="none" stroke="${col}" stroke-width="2"/></svg>`;
+    const tip=o.hist.map(h=>h[0]+': '+fmt(h[1])).join('\n');
+    return `<svg class="spark" width="${w}" height="${ht}" title="${tip}"><title>${tip}</title><polyline points="${pts}" fill="none" stroke="${col}" stroke-width="2"/></svg>`;
   };
   const rowHtml = (o,i)=>`
     <tr>
