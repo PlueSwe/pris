@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Srixon Q-Star — prisjämförelse golfbollar</title>
+<style>
+  :root{
+    --bg:#f4f6fb; --panel:#ffffff; --panel2:#f0f3f9; --line:#e2e7f0;
+    --text:#1b2330; --muted:#5f6b7d; --accent:#2f6bff; --accent2:#7c5cff;
+    --good:#1c8c3b; --warn:#b9820a; --bad:#d23b34;
+    --shadow:0 6px 24px rgba(40,60,100,.10);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:radial-gradient(1200px 600px at 10% -10%,#e8f6ec 0,var(--bg) 55%);color:var(--text);padding:28px 18px 70px}
+  .wrap{max-width:1080px;margin:0 auto}
+  h1{margin:0 0 4px;font-size:26px}
+  .sub{color:var(--muted);font-size:14px;margin:0}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 22px}
+  .pill{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:12.5px;color:var(--muted)}
+  .pill b{color:var(--text)}
+
+  .configs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+  .cfg{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:16px 14px;cursor:pointer;
+    box-shadow:var(--shadow);transition:transform .15s,border-color .15s;text-align:left}
+  .cfg:hover{transform:translateY(-3px)}
+  .cfg.active{border-color:var(--good);background:linear-gradient(180deg,#f3fbf5,#fff)}
+  .cfg .prod{font-size:11px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;color:var(--good)}
+  .cfg .ram{font-size:19px;font-weight:820;letter-spacing:-.4px;margin:4px 0 2px}
+  .cfg .chip{font-size:12.5px;color:var(--muted)}
+  .cfg .from{font-size:13px;font-weight:700;margin-top:8px;color:var(--good)}
+
+  table{width:100%;border-collapse:separate;border-spacing:0;background:var(--panel);border:1px solid var(--line);
+    border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+  thead th{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);text-align:left;
+    padding:12px 14px;background:var(--panel2);border-bottom:1px solid var(--line)}
+  tbody td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:13.5px;vertical-align:middle}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover td{background:#eef2fb}
+  .rank{font-weight:700;color:var(--muted);width:30px}
+  .rank.first{color:#d8a200}
+  .shop{font-weight:600}
+  .spec{display:block;color:var(--muted);font-size:11.5px;font-weight:400}
+  .shoplink{text-decoration:none}
+  .shoplink .shop{color:var(--accent)}
+  .shoplink:hover .shop{text-decoration:underline}
+  .price{font-weight:750;white-space:nowrap}
+  .price .orig{display:block;font-weight:400;color:var(--muted);font-size:11.5px;text-decoration:line-through}
+  .price .per{display:block;font-weight:400;color:var(--muted);font-size:11px}
+  .camp{display:inline-block;background:#ffe9d6;color:#b45309;font-size:10px;font-weight:800;padding:2px 7px;border-radius:6px;letter-spacing:.3px;margin-top:3px}
+  .tag{display:inline-block;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.3px;white-space:nowrap}
+  .t-ok{background:rgba(28,140,59,.14);color:#1c8c3b}
+  .t-info{background:rgba(95,107,125,.14);color:#4a5568}
+  .t-warn{background:rgba(185,130,10,.16);color:#9a6b06}
+  .t-used{background:rgba(124,92,255,.15);color:#6a4bd1}
+  .t-out{background:rgba(210,59,52,.13);color:#d23b34}
+  a.go{color:var(--accent);text-decoration:none;font-weight:600;white-space:nowrap;font-size:13px}
+  a.go:hover{text-decoration:underline}
+  .cfgnote{font-size:12.5px;color:var(--muted);margin:14px 2px 0;line-height:1.55}
+  footer{margin-top:26px;color:var(--muted);font-size:12px;line-height:1.6}
+  @media(max-width:700px){.configs{grid-template-columns:1fr};.hide-sm{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p style="margin:0 0 14px"><a href="index.html" style="color:#2f6bff;text-decoration:none;font-weight:600;font-size:14px">← Fyndguiden — start</a></p>
+  <h1>⛳ Srixon Q-Star — prisjämförelse</h1>
+  <p class="sub">Priser per <b>dussin (12 bollar)</b>, inkl. moms, hos butiker som levererar till Sverige. Välj variant nedan.</p>
+
+  <div class="meta">
+    <span class="pill">Sidan senast ändrad <b>2026-08-17</b></span>
+    <span class="pill" title="Varje butik kontrolleras vid olika tillfällen">Priser kontrollerade <b>löpande</b> per butik</span>
+    <span class="pill">🟣 = rekond./lakebollar (begagnade)</span>
+  </div>
+
+  <div class="configs" id="configs"></div>
+
+  <table>
+    <thead><tr><th>#</th><th>Butik</th><th>Pris / dussin</th><th>Status</th><th class="hide-sm"></th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <p class="cfgnote" id="cfgnote"></p>
+
+  <footer>
+    <p>Rekonditionerade bollar ("lakebollar") är begagnade och sorterade i kvalitetsklasser — de spelar bra men är kosmetiskt begagnade och kan inte jämföras rakt av med nypris. Medlemspriser kräver gratis medlemskap hos respektive butik. Priser ändras ofta i golfsäsongen; kontrollera alltid i kassan.</p>
+  </footer>
+</div>
+
+<script>
+const fmt = n => n.toLocaleString("sv-SE") + " kr";
+
+const configs = [
+  {
+    id:"tour", prod:"Srixon", ram:"Q-Star Tour", chip:"3-lager urethan · vit",
+    note:"Den klassiska Q-Star Tour — treskiktsboll med urethanskal, byggd för lägre svinghastigheter. Flera butiker har medlemspris som är rejält lägre än ordinarie: Dormy 349 kr som medlem mot 479 kr utan. Dimbo har lagt ner artikeln (tillverkning upphört), så räkna med att 2024-versionen fasas ut och rear ut nu.",
+    offers:[
+      {shop:"🇸🇪 Swegolf", spec:"Q-Star Tour · dussin", price:349, orig:449, camp:"−22 %", tag:["t-ok","i lager"], url:"https://www.swegolf.se/collections/srixon-golfbollar"},
+      {shop:"🇸🇪 Dormy Golf", spec:"Q-Star Tour vit · dussin · medlemspris", price:349, orig:479, camp:"medlem", tag:["t-ok","i webblager"], url:"https://www.dormy.com/sv/varumarken/srixon/q-star-tour-vit-08026130"},
+      {shop:"🇸🇪 Happy Golfer", spec:"Q-Star Tour · dussin · medlemspris", price:407, orig:479, camp:"medlem", tag:["t-warn","endast 12 kvar"], url:"https://shop.happygolfer.se/products/srixon-q-star-dussin"},
+      {shop:"🇸🇪 Dormy Golf", spec:"Q-Star Tour vit · dussin · ord. pris", price:479, tag:["t-info","utan medlemskap"], url:"https://www.dormy.com/sv/varumarken/srixon/q-star-tour-vit-08026130"},
+      {shop:"🇸🇪 Dimbo Golf", spec:"Q-Star Tour vit · dussin", price:399, tag:["t-out","slutsåld · utgått"], url:"https://www.dimbo.se/rea-bollar/srixon-golfboll-q-star-tour-vit-1st-dussin"},
+    ],
+    altTitle:"Rekonditionerade (lakebollar) — begagnade, betydligt billigare",
+    altOffers:[
+      {shop:"🇸🇪 Plikt Golf", spec:"Q-Star Tour · 12-pack · A/B-klass", price:219, tag:["t-used","rekond · i lager"], url:"https://pliktgolf.se/products/srixon-qstar"},
+      {shop:"🇸🇪 NJGolf", spec:"Q-Star Tour · klass A–D · 12/48/96-pack", price:null, tag:["t-used","rekond · se sida"], url:"https://www.njgolf.se/97-srixon-q-star-tour.html"},
+      {shop:"🇸🇪 Golf Refill", spec:"Q-Star Tour · återvunna", price:null, tag:["t-used","rekond · se sida"], url:"https://golfrefill.com/sv-se/products/srixon-q-star-tour"},
+    ]
+  },
+  {
+    id:"divide", prod:"Srixon", ram:"Q-Star Tour Divide", chip:"tvåfärgad 50/50",
+    note:"Divide har samma konstruktion som Q-Star Tour men med tvåfärgad 50/50-design som gör spinnen synlig — populär för putt- och inspelsträning. Out of Bounds säljer den bara i blandpaket tillsammans med Z-Star Divide och kan inte garantera fördelningen, så den raden är inte en ren Q-Star-affär.",
+    offers:[
+      {shop:"🇸🇪 Swegolf", spec:"Q-Star Tour Divide · dussin", price:349, orig:499, camp:"−30 %", tag:["t-ok","i lager"], url:"https://www.swegolf.se/collections/srixon-golfbollar"},
+      {shop:"🇩🇪 All4Golf (levererar SE)", spec:"Q-Star Tour Divide · 12-pack", price:399, orig:469, camp:"−15 %", tag:["t-ok","EU · ingen tull"], url:"https://www.all4golf.com/se/srixon-golfbollar-q-star-tour-6-divide-12-pack-flerfaergad-5138423"},
+      {shop:"🇸🇪 Out of Bounds", spec:"Blandpaket Z-Star + Q-Star Divide · 12 st", price:399, tag:["t-warn","blandad modell"], url:"https://www.out-of-bounds.se/golfbollar/srixon-qstar-tour-divide"},
+      {shop:"🇸🇪 Dimbo Golf", spec:"Q-Star Tour Divide gul/blå · dussin · medlemspris", price:299, orig:429, tag:["t-out","slutsåld · utgått"], url:"https://www.dimbo.se/dussin/srixon-golfboll-q-star-tour-divide-gul-bla-1st-dussin"},
+    ],
+    altTitle:"Rekonditionerade (lakebollar)",
+    altOffers:[
+      {shop:"🇸🇪 Out of Bounds", spec:"Blandpaket · andrasortering · 12 st", price:309, tag:["t-used","2:a sortering"], url:"https://www.out-of-bounds.se/golfbollar/srixon-qstar-tour-divide"},
+    ]
+  },
+  {
+    id:"ultispeed", prod:"Srixon", ram:"Q-Star Ultispeed", chip:"Trackline",
+    note:"Ultispeed Trackline är den billigaste Q-Star-varianten — tvålagersboll med linjemönster som hjälper vid puttning. Mjukare priskategori än Tour-modellerna, men också enklare konstruktion (ingen urethan).",
+    offers:[
+      {shop:"🇸🇪 Swegolf", spec:"Q-Star Ultispeed Trackline · dussin", price:299, orig:399, camp:"−25 %", tag:["t-ok","i lager"], url:"https://www.swegolf.se/collections/srixon-golfbollar"},
+    ],
+    altTitle:"Rekonditionerade (lakebollar)",
+    altOffers:[
+      {shop:"🇸🇪 NJGolf", spec:"Q-Star · klass A–D · 12/48/96-pack", price:null, tag:["t-used","rekond · se sida"], url:"https://www.njgolf.se/43-srixon-q-star.html"},
+    ]
+  },
+];
+
+let active = "tour";
+
+function render(){
+  const cfgEl = document.getElementById("configs");
+  cfgEl.innerHTML = configs.map(c=>{
+    const inStock = c.offers.filter(o=>o.price && !o.tag[1].includes("slutsåld"));
+    const cheapest = inStock.length?Math.min(...inStock.map(o=>o.price)):null;
+    return `<button class="cfg ${c.id===active?'active':''}" data-id="${c.id}">
+      <div class="prod">${c.prod}</div>
+      <div class="ram">${c.ram}</div>
+      <div class="chip">${c.chip}</div>
+      <div class="from">${cheapest?'från '+fmt(cheapest):'—'}</div>
+    </button>`;
+  }).join("");
+  cfgEl.querySelectorAll(".cfg").forEach(b=>b.addEventListener("click",()=>{active=b.dataset.id;render();}));
+
+  const c = configs.find(x=>x.id===active);
+  const rowHtml = (o,i)=>`
+    <tr>
+      <td class="rank ${i===0&&o.price?'first':''}">${o.price?i+1:'–'}</td>
+      <td><a class="shoplink" href="${o.url}" target="_blank" rel="noopener"><span class="shop">${o.shop}</span></a><span class="spec">${o.spec}</span></td>
+      <td class="price">${o.price?fmt(o.price):'se sida'}${o.orig?`<span class="orig">${fmt(o.orig)}</span>`:''}${o.price?`<span class="per">${(o.price/12).toFixed(0)} kr/boll</span>`:''}${o.camp?`<span class="camp">${o.camp}</span>`:''}</td>
+      <td><span class="tag ${o.tag[0]}">${o.tag[1]}</span></td>
+      <td class="hide-sm"><a class="go" href="${o.url}" target="_blank" rel="noopener">Öppna →</a></td>
+    </tr>`;
+
+  let html = [...c.offers].sort((a,b)=>(a.price??Infinity)-(b.price??Infinity)).map(rowHtml).join("");
+  if(c.altOffers && c.altOffers.length){
+    html += `<tr><td colspan="5" style="background:#faf7ff;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#6a4bd1;font-weight:700;padding:8px 14px">${c.altTitle}</td></tr>`;
+    html += [...c.altOffers].sort((a,b)=>(a.price??Infinity)-(b.price??Infinity)).map(rowHtml).join("");
+  }
+  document.getElementById("rows").innerHTML = html;
+  document.getElementById("cfgnote").innerHTML = "ℹ️ " + c.note;
+}
+render();
+</script>
+</body>
+</html>

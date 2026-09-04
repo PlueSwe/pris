@@ -22,7 +22,9 @@
   .pill b{color:var(--text)}
 
   /* Konfig-väljare */
-  .configs{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
+  .configs{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px;margin-bottom:20px}
+  .cfg.gen-new{border-color:#bcd6ff}
+  .cfg.gen-new .prod{color:#1c8c3b}
   .cfg{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:16px 14px;cursor:pointer;
     box-shadow:var(--shadow);transition:transform .15s,border-color .15s;text-align:left}
   .cfg:hover{transform:translateY(-3px)}
@@ -82,7 +84,7 @@
   <p class="sub">Välj en konfiguration — butikspriser visas billigast först. Alla priser <b>inkl. moms</b>, leverans Sverige/EU.</p>
 
   <div class="meta">
-    <span class="pill">Sidan senast ändrad <b>2026-08-12</b></span>
+    <span class="pill">Sidan senast ändrad <b>2026-09-04</b></span>
     <span class="pill" title="Varje butik kontrolleras vid olika tillfällen — se trendkurvan för mätdatum">Priser kontrollerade <b>löpande</b> per butik</span>
     <span class="pill">Kurs <b>1 € ≈ 11,4 kr</b></span>
     <span class="pill">Krav: mini <b>48 GB</b> · Studio <b>≥ 96 GB</b></span>
@@ -112,6 +114,45 @@ const EUR = 11.4;
 const fmt = n => n.toLocaleString("sv-SE") + " kr";
 
 const configs = [
+  /* ===== NYA GENERATIONEN (annonserad 25 aug 2026, släpps 22 sept) ===== */
+  {
+    id:"mini64m5", prod:"Mac mini · NY", chip:"M5 Pro", ram:"64 GB", isNew:true,
+    banner:"🆕 <b>Ny generation — förbeställ, släpps 22 september 2026.</b> M5 Pro har minnesnivåerna 24 och 64 GB (ingen 48 GB), så 64 GB är den som möter ditt krav. <b>M6-modellen klarar max 32 GB</b> och kan därför inte användas alls för ditt behov, trots att den är nyare och billigare (från 11 995 kr).",
+    note:"M5 Pro höjer mini-taket från 48 GB till 64 GB. Den 15-kärniga varianten är 2 600 kr billigare än den 18-kärniga och har samma minne — välj den om du inte behöver extra CPU/GPU-kärnor. Jämför med förra generationens M4 Pro 48 GB på 28 795 kr: du får 16 GB mer minne för ca 6 700 kr extra.",
+    offers:[
+      {shop:"🇸🇪 Apple.se", spec:"M5 Pro 15-k/16-GPU · 64 GB · 512 GB", price:35495, hist:[["2026-09-04",35495]], tag:["t-info","förbeställ · 22 sept"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
+      {shop:"🇸🇪 Apple.se", spec:"M5 Pro 18-k/20-GPU · 64 GB · 512 GB", price:38095, hist:[["2026-09-04",38095]], tag:["t-info","förbeställ · 22 sept"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
+      {shop:"🇸🇪 Apple.se", spec:"M6 · max 32 GB — uppfyller EJ kravet", price:11995, tag:["t-out","för lite minne"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
+    ]
+  },
+  {
+    id:"max128m5", prod:"Mac Studio · NY", chip:"M5 Max", ram:"128 GB", isNew:true,
+    banner:"🆕 <b>Ny generation — förbeställ, släpps 22 september 2026.</b> Detta ersätter M4 Max 128 GB som är slutsåld överallt — och till <b>exakt samma pris (70 695 kr)</b>, fast med nyare chip.",
+    note:"M5 Max har 18-kärnig CPU och upp till 40-kärnig GPU, med minnesnivåer upp till 128 GB. Eftersom M4 Max 128 GB inte går att få tag på nytt längre är detta numera det enda sättet att köpa en ny Mac Studio med 128 GB.",
+    offers:[
+      {shop:"🇸🇪 Apple.se", spec:"M5 Max 18-k/40-GPU · 128 GB · 1 TB", price:70695, hist:[["2026-09-04",70695]], tag:["t-info","förbeställ · 22 sept"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
+      {shop:"🇸🇪 Apple.se", spec:"M5 Max bas · 36 GB · 512 GB (referens)", price:32995, tag:["t-out","för lite minne"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
+    ]
+  },
+  {
+    id:"ultra96m5", prod:"Mac Studio · NY", chip:"M5 Ultra", ram:"96 GB", isNew:true,
+    banner:"🆕 <b>Ny generation — förbeställ, släpps 22 september 2026.</b> Basmodellen av M5 Ultra har 96 GB, alltså precis ditt minimikrav.",
+    note:"Prisjämförelse mot förra generationen: M3 Ultra 96 GB kostade 69 995 kr — M5 Ultra 96 GB ligger på 72 995 kr, alltså 3 000 kr dyrare för ett betydligt snabbare chip (36-kärnig CPU, 80-kärnig GPU, kvadrupel-die).",
+    offers:[
+      {shop:"🇸🇪 Apple.se", spec:"M5 Ultra · 96 GB · 1 TB (bas)", price:72995, hist:[["2026-09-04",72995]], tag:["t-info","förbeställ · 22 sept"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
+    ]
+  },
+  {
+    id:"ultra256m5", prod:"Mac Studio · NY", chip:"M5 Ultra", ram:"256 GB", isNew:true,
+    banner:"🆕 <b>Stor nyhet för dig:</b> 256 GB går att köpa <b>nytt igen</b> — och för <b>141 895 kr</b>, alltså ca <b>70 000 kr billigare</b> än vad begagnade M3 Ultra 256 GB kostar på eBay (~211 800 kr). Den begagnade vägen är därmed inte längre värd det. <b>512 GB-alternativet kommer i slutet av oktober.</b>",
+    note:"Efter DRAM-bristen som fick Apple att stryka 256 och 512 GB på M3 Ultra är båda nivåerna tillbaka med M5 Ultra. 256 GB kan förbeställas nu (levereras 22 sept); 512 GB släpps i slutet av oktober och pris för den nivån är ännu inte publicerat.",
+    offers:[
+      {shop:"🇸🇪 Apple.se", spec:"M5 Ultra 36-k/80-GPU · 256 GB · 1 TB", price:141895, hist:[["2026-09-04",141895]], tag:["t-info","förbeställ · 22 sept"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
+      {shop:"🇸🇪 Apple.se", spec:"M5 Ultra · 512 GB — pris ej publicerat", price:null, tag:["t-warn","kommer sent okt"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
+    ]
+  },
+
+  /* ===== FÖREGÅENDE GENERATION ===== */
   {
     id:"mini48", prod:"Mac mini", chip:"M4 Pro", ram:"48 GB",
     note:"M4 Pro-minnesnivåer: 24 / 48 / 64 GB — 64 GB finns också och överträffar kravet (MacRent från 33 995 kr). 48 GB är beställningsvara: kedjebutikerna (NetOnNet, Power, Elgiganten, Webhallen, Komplett) lagerför bara 24 GB-standarden. MacRent listar 20 varianter (alla ”kan beställas”, 0 i lager); 10 Gigabit Ethernet kostar +1 300 kr på samtliga. Apples påslag: +48 GB = +7 800 kr, 14-k CPU = +2 600 kr.",
@@ -218,13 +259,13 @@ function drawChart(c){
   meta.innerHTML = ` · ${dates[0].slice(5).replace('-','/')}→idag: <b style="color:${col}">${pct===0?'oförändrat':(pct>0?'+':'')+pct+' %'}</b> (${fmt(vals[0])} → ${fmt(vals[vals.length-1])})`;
 }
 
-let active = "mini48";
+let active = "mini64m5";
 
 function render(){
   const cfgEl = document.getElementById("configs");
   cfgEl.innerHTML = configs.map(c=>{
     const cheapest = Math.min(...c.offers.filter(o=>o.price).map(o=>o.price));
-    return `<button class="cfg ${c.id===active?'active':''} ${c.used?'used':''}" data-id="${c.id}">
+    return `<button class="cfg ${c.id===active?'active':''} ${c.used?'used':''} ${c.isNew?'gen-new':''}" data-id="${c.id}">
       <div class="prod">${c.prod}</div>
       <div class="ram">${c.ram}</div>
       <div class="chip">${c.chip}${c.used?' · '+(c.subLabel||'begagnat'):''}</div>
