@@ -93,10 +93,11 @@ const fmt = n => n.toLocaleString("sv-SE") + " kr";
 const configs = [
   {
     id:"book6pro", prod:"Book6 Pro · NY", ram:'14" Pro', chip:"Ultra 7 (Series 3)", isNew:true,
-    note:"Toppmodellen, lanserad på CES 2026 med Intel Core Ultra Series 3 på 18A-processen, 3K WQXGA+ AMOLED-touch i 120 Hz och NPU på upp till 50 TOPS. 14-tumsvarianten är ca 11,6 mm tunn och väger ca 1,24 kg. Max 32 GB minne. 14\" är 1 200 kr billigare än 16\" (32 490 kr) med samma specifikation i övrigt.",
+    banner:"💰 <b>Enorm prisskillnad — kontrollera själv innan köp.</b> Samma artikelnummer (NP944XJG-KG4SE) kostar <b>17 990 kr hos Inet</b> men <b>31 290 kr hos Samsung.se</b> — en skillnad på 13 300 kr. Båda priserna är avlästa direkt från butikernas egna produktdata 2026-09-08. En så stor skillnad på identisk SKU är ovanlig, så verifiera i kassan att det verkligen är samma konfiguration.",
+    note:"Toppmodellen, lanserad på CES 2026 med Intel Core Ultra Series 3 på 18A-processen, 3K WQXGA+ AMOLED-touch i 120 Hz och NPU på upp till 50 TOPS. 14-tumsvarianten är ca 11,6 mm tunn. Max 32 GB minne. Inet har −10 % Back to School-kampanj (ord. 19 990 kr) men webblagret är slut — nytt in 2026-09-16, och 1 ex finns i Göteborg/Sisjön.",
     offers:[
-      {shop:"🇸🇪 Samsung.se", spec:'14" · Ultra 7 356H · 32 GB · 1 TB', price:31290, tag:["t-ok","i lager"], url:"https://www.samsung.com/se/computers/galaxy-book/galaxy-book6-series/buy/"},
-      {shop:"🇸🇪 Inet", spec:'14" · Ultra 7 · 32 GB · 1 TB', price:null, tag:["t-info","se sida"], url:"https://www.inet.se/produkt/1978738/samsung-galaxy-book6-pro-14-ultra-7-32gb-1tb"},
+      {shop:"🇸🇪 Inet", spec:'14" · Ultra 7 356H · 32 GB · 1 TB · −10 % (ord. 19 990)', price:17990, tag:["t-warn","slut · in 16 sept"], url:"https://www.inet.se/produkt/1978738/samsung-galaxy-book6-pro-14-ultra-7-32gb-1tb"},
+      {shop:"🇸🇪 Samsung.se", spec:'14" · Ultra 7 356H · 32 GB · 1 TB', price:31290, tag:["t-ok","i lager"], url:"https://www.samsung.com/se/computers/galaxy-book/galaxy-book6-pro-ultra-7-32gb-1tb-np944xjg-kg4se/"},
       {shop:"🇸🇪 Buyn", spec:"Galaxy Book-sortiment", price:null, tag:["t-info","se sida"], url:"https://buyn.se/collections/samsung-galaxy-book"},
     ]
   },
@@ -110,11 +111,11 @@ const configs = [
   },
   {
     id:"book5pro", prod:"Book5 Pro", ram:'14" Pro', chip:"Ultra 7 256V (Lunar Lake)", old:true,
-    banner:"⚠️ <b>Utgången hos Samsung</b> — samsung.se skriver \"Den här produkten är inte längre tillgänglig\". Finns kvar hos återförsäljare och rekond, ofta klart billigare än Book6 Pro.",
-    note:"Copilot+ PC med Intel Lunar Lake (Ultra 7 256V), 14\" AMOLED WQXGA+ touch 2880×1800 och Wi-Fi 7. Prisvärt mellanläge: ca 10 000 kr billigare än Book6 Pro, men med förra generationens processor och 16 GB i stället för 32 GB i de vanligaste konfigarna.",
+    banner:"⛔ <b>Utgången överallt jag kan kontrollera.</b> Samsung.se: \"inte längre tillgänglig\". Proshop och Komplett har den kvar på sidan men båda är märkta <b>Discontinued</b> i sin egen produktdata (Komplett visar till och med pris 0). Priserna nedan är alltså sista noterade — räkna inte med att kunna beställa. Kolla rekond-marknaden i stället.",
+    note:"Copilot+ PC med Intel Lunar Lake (Ultra 7 256V), 14\" AMOLED WQXGA+ touch 2880×1800 och Wi-Fi 7. Var ett prisvärt mellanläge, men generationen fasas nu ut snabbt — kontrollerat 2026-09-08 hittade jag ingen butik med bekräftad lagerstatus. Rekond är därför den realistiska vägen till en Book5 Pro.",
     offers:[
-      {shop:"🇸🇪 Komplett", spec:'14" · Ultra 7 · 16 GB · 512 GB · AMOLED touch', price:21739, tag:["t-ok","hos återförsäljare"], url:"https://www.komplett.se/product/1329543/dator-tillbehor/datorer-barbara-laptop/samsung-galaxy-book5-pro-14-amoled-wqxga-touch-copilot-pc-graa"},
-      {shop:"🇸🇪 Proshop", spec:'14" · Ultra 7 256V · 16 GB · 512 GB', price:21990, tag:["t-ok","hos återförsäljare"], url:"https://www.proshop.se/Baerbar-dator/Samsung-Galaxy-Book5-Pro-14-Touchscreen-Core-Ultra-7-16GB-512GB/3328032"},
+      {shop:"🇸🇪 Proshop", spec:'14" · Ultra 7 256V · 16 GB · 512 GB · sista noterade pris', price:21990, tag:["t-out","discontinued"], url:"https://www.proshop.se/Baerbar-dator/Samsung-Galaxy-Book5-Pro-14-Touchscreen-Core-Ultra-7-16GB-512GB/3328032"},
+      {shop:"🇸🇪 Komplett", spec:'14" · Ultra 7 · 16 GB · 512 GB · AMOLED touch', price:null, tag:["t-out","discontinued"], url:"https://www.komplett.se/product/1329543/dator-tillbehor/datorer-barbara-laptop/samsung-galaxy-book5-pro-14-amoled-wqxga-touch-copilot-pc-graa"},
       {shop:"🇸🇪 Samsung.se", spec:'14" · Ultra 7 · 32 GB · 1 TB', price:null, tag:["t-out","utgått"], url:"https://www.samsung.com/se/computers/galaxy-book/galaxy-book5-pro-14-inch-core-7-32gb-1tb-np940xha-kg1se/"},
     ],
     altTitle:"Rekonditionerad",
