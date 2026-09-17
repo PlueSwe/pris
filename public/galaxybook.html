@@ -58,12 +58,6 @@
   a.go{color:var(--accent);text-decoration:none;font-weight:600;white-space:nowrap;font-size:13px}
   a.go:hover{text-decoration:underline}
   .cfgnote{font-size:12.5px;color:var(--muted);margin:14px 2px 0;line-height:1.55}
-  .cmp{margin-top:34px}
-  .cmp h2{font-size:20px;margin:0 0 4px;letter-spacing:-.3px}
-  .cmp-sub{color:var(--muted);font-size:13.5px;margin:0 0 14px}
-  .cmp-wrap{overflow-x:auto}
-  .cmp table td{vertical-align:top}
-  .cmp-verdict{font-size:13.5px;line-height:1.6;margin:14px 2px 0;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
   footer{margin-top:26px;color:var(--muted);font-size:12px;line-height:1.6}
   @media(max-width:600px){.hide-sm{display:none}}
 </style>
@@ -72,7 +66,7 @@
 <div class="wrap">
   <p style="margin:0 0 14px"><a href="index.html" style="color:#2f6bff;text-decoration:none;font-weight:600;font-size:14px">← Fyndguiden — start</a></p>
   <h1>💻 Samsung Galaxy Book</h1>
-  <p class="sub">14-tums Book5 och Book6 (inkl. Pro), vikbara Pro 360 samt 16-tums Book5 Pro 360 och Book6 Pro med 32 GB för jämförelse. Priser inkl. moms, butiker som levererar till Sverige.</p>
+  <p class="sub">14-tums Book5 och Book6 (inkl. Pro) samt 16-tums Book6 Pro med 32 GB. Priser inkl. moms, butiker som levererar till Sverige.</p>
 
   <div class="meta">
     <span class="pill">Sidan senast ändrad <b>2026-09-08</b></span>
@@ -88,30 +82,8 @@
   </table>
   <p class="cfgnote" id="cfgnote"></p>
 
-  <section class="cmp">
-    <h2>Jämförelse: Book5 Pro 360 vs Book6 Pro 16"</h2>
-    <p class="cmp-sub">Båda i din målkonfiguration — 32 GB minne och 1 TB lagring. En Book6 Pro 360 finns inte, så Book6 Pro 16" är närmaste nya motsvarighet.</p>
-    <div class="cmp-wrap">
-    <table>
-      <thead><tr><th></th><th>Book5 Pro 360 · 16"</th><th>Book6 Pro · 16"</th></tr></thead>
-      <tbody>
-        <tr><td class="shop">Formfaktor</td><td><b>2-i-1</b>, 360°-gångjärn</td><td>Vanlig laptop</td></tr>
-        <tr><td class="shop">Penna</td><td><b>S Pen ingår</b></td><td>Ingen S Pen</td></tr>
-        <tr><td class="shop">Processor</td><td>Core Ultra 7 258V<br><span class="spec">Lunar Lake · 2024</span></td><td><b>Core Ultra 7 356H</b><br><span class="spec">Panther Lake 18A · 2026</span></td></tr>
-        <tr><td class="shop">Minne / lagring</td><td>32 GB / 1 TB</td><td>32 GB / 1 TB</td></tr>
-        <tr><td class="shop">Skärm</td><td>16" 3K AMOLED touch · 120 Hz</td><td>16" 3K AMOLED touch · 120 Hz</td></tr>
-        <tr><td class="shop">Vikt</td><td>1,69 kg</td><td><b>1,59 kg</b></td></tr>
-        <tr><td class="shop">Batteri</td><td>76 Wh · upp till 25 h video</td><td><b>78 Wh · upp till 30 h video</b></td></tr>
-        <tr><td class="shop">NPU (AI)</td><td>47 TOPS</td><td><b>50 TOPS</b></td></tr>
-        <tr><td class="shop">Billigast i Sverige</td><td><span class="tag t-out">slutsåld</span><br><span class="spec">sista pris 19 990 kr (Elgiganten)</span></td><td><b>22 989 kr</b> <span class="tag t-ok">i lager</span><br><span class="spec">Elgiganten · Inet 27 990 kr (beställningsvara)</span></td></tr>
-      </tbody>
-    </table>
-    </div>
-    <p class="cmp-verdict"><b>Slutsats:</b> Vill du ha en vikbar maskin med penna är Book5 Pro 360 enda Samsung-alternativet — men den är slut i 32 GB hos svenska butiker, så det blir begagnat eller EU-import. Är vikningen inte avgörande ger Book6 Pro 16" nyare processor, längre batteritid och lägre vikt för ca 3 000 kr mer än vad Book5 Pro 360 senast kostade — och den går att köpa nu.</p>
-  </section>
-
   <footer>
-    <p>Senaste genomgång av alla butiker: 2026-09-16. Book4 Pro är borttagen från sidan eftersom ingen svensk butik längre säljer den, och rader som bara visade "utgått" eller "se sida" är rensade. Samsung fasar ut äldre generationer snabbt — de dyker då ofta upp billigare hos återförsäljare och som outlet.</p>
+    <p>Senaste genomgång av alla butiker: 2026-09-16. De vikbara Pro 360-modellerna och Book4 Pro är borttagna från sidan eftersom de inte längre går att köpa nya i Sverige, och rader som bara visade "utgått" eller "se sida" är rensade. Samsung fasar ut äldre generationer snabbt — de dyker då ofta upp billigare hos återförsäljare och som outlet.</p>
   </footer>
 </div>
 
@@ -145,34 +117,10 @@ const configs = [
       {shop:"🇸🇪 Elgiganten", spec:'14" · Ultra 7 258V · 32 GB · 512 GB · ny', price:14995, tag:["t-ok","i lager"], url:"https://www.elgiganten.se/product/datorer-kontor/datorer/laptop/samsung-galaxy-book5-pro-u7-258v32512-14-copilot-pc/877806"},
     ]
   },
-  {
-    id:"pro360", prod:"Pro 360 (2-i-1)", ram:'13,3"', chip:"vikbar · endast begagnat", old:true, soldOut:true,
-    banner:"⚠️ <b>Ingen vikbar Galaxy Book under 15 tum går att köpa ny.</b> Från Book3-generationen (2023) finns Pro 360 bara i 16 tum. 13,3-tummarna från 2021–2022 är utgångna överallt, och CDON:s begagnade exemplar är borttaget (kontrollerat 2026-09-16). Kvar är begagnatmarknaden.",
-    note:"Galaxy Book Pro 360 (2021) och Book2 Pro 360 (2022) fanns i 13,3\" och 15,6\". De har Intel 11:e/12:e generationens processorer och saknar Copilot+-stöd. Vill du ha en modern vikbar Galaxy Book får det bli 16-tums Book5 Pro 360 längre ned.",
-    offers:[
-      {shop:"🇸🇪 Blocket", spec:'Galaxy Book Pro 360 13,3" · begagnat', price:null, tag:["t-used","sök live"], url:"https://www.blocket.se/annonser/hela_sverige?q=galaxy%20book%20pro%20360"},
-      {shop:"🇸🇪 Tradera", spec:'Galaxy Book Pro 360 13,3" · begagnat', price:null, tag:["t-used","sök live"], url:"https://www.tradera.com/search?q=galaxy+book+pro+360"},
-    ]
-  },
-  /* ===== 16 TUM — över storlekskravet, med för jämförelse (32 GB / 512 GB–1 TB) ===== */
-  {
-    id:"book5pro360", prod:"Book5 Pro 360 · 16\"", ram:'16" 2-i-1', chip:"Ultra 7 258V · 32 GB", old:true, soldOut:true,
-    banner:"⛔ <b>Slutsåld i Sverige i 32 GB-utförande.</b> Elgiganten har den som <b>SoldOut</b> (sista pris 19 990 kr), Inet som <b>Utgått</b>, och Samsung.se visar inget köppris. Den vikbara Book5 Pro 360 är dessutom <b>sista vikbara Galaxy Book</b> — Book6-serien fick ingen 360-modell.",
-    note:"2-i-1 med 360°-gångjärn och <b>S Pen i kartongen</b>. Intel Core Ultra 7 258V (Lunar Lake, 2024) med 32 GB minne på chippet, 16\" 3K AMOLED-touch i 120 Hz, 1,69 kg, 76 Wh (upp till 25 h video), NPU 47 TOPS. 32 GB-versionen har 1 TB i Sverige; en 32 GB/512 GB-variant finns i Tyskland men inte hos svenska butiker. Se jämförelsen mot Book6 Pro 16\" nedanför tabellen.",
-    offers:[
-      {shop:"🇸🇪 Elgiganten", spec:'16" · Ultra 7 258V · 32 GB · 1 TB · S Pen · sista pris 19 990 kr', price:null, tag:["t-out","slutsåld"], url:"https://www.elgiganten.se/product/datorer-kontor/datorer/laptop/samsung-galaxy-book5-pro-360-u7321024-16-copilot-pc/877809"},
-      {shop:"🇸🇪 Inet", spec:'16" · Ultra 7 · 32 GB · 1 TB', price:null, tag:["t-out","utgått"], url:"https://www.inet.se/produkt/1977825/samsung-galaxy-book5-pro-360-ultra-7-32gb-1tb"},
-      {shop:"🇸🇪 Samsung.se", spec:'16" · Ultra 7 · 32 GB · 1 TB · NP960QHA-KG3SE', price:null, tag:["t-out","inget köppris"], url:"https://www.samsung.com/se/computers/galaxy-book/galaxy-book5-pro-360-16-inch-core-7-32gb-1tb-np960qha-kg3se/"},
-    ],
-    altTitle:"Begagnat / EU — sök live",
-    altOffers:[
-      {shop:"🇪🇺 eBay.de", spec:'Book5 Pro 360 · 32 GB · 512 GB–1 TB · ny/begagnad', price:null, tag:["t-used","EU · kontrollera säljare"], url:"https://www.ebay.de/sch/i.html?_nkw=galaxy+book5+pro+360+32gb&_sop=15"},
-      {shop:"🇸🇪 Blocket", spec:'Book5 Pro 360 · begagnat inrikes', price:null, tag:["t-used","sök live"], url:"https://www.blocket.se/annonser/hela_sverige?q=galaxy%20book5%20pro%20360"},
-    ]
-  },
+  /* ===== 16 TUM — över storlekskravet, med för jämförelse ===== */
   {
     id:"book6pro16", prod:"Book6 Pro · 16\"", ram:'16" Pro', chip:"Ultra 7 356H · 32 GB", isNew:true,
-    banner:"ℹ️ <b>Det finns ingen Book6 Pro 360.</b> Samsung släppte ingen vikbar modell i Book6-serien. Närmaste nya alternativ är vanliga Book6 Pro 16\". <b>Inets kampanj är slut</b> (19 990 → 27 990 kr, och nu beställningsvara) — billigast i lager är Elgiganten med 22 989 kr.",
+    banner:"ℹ️ <b>Större skärm, samma 32 GB / 1 TB.</b> <b>Inets kampanj är slut</b> (19 990 → 27 990 kr, och nu beställningsvara) — billigast i lager är Elgiganten med 22 989 kr.",
     note:"Vanlig laptop (ej vikbar, ingen S Pen). Intel Core Ultra 7 356H (Panther Lake på 18A, 2026), 32 GB, 16\" 3K AMOLED-touch i 120 Hz, 1,59 kg, 78 Wh (upp till 30 h video), NPU 50 TOPS. Elgigantens variant har Windows 11 Pro. Kontrollerat 2026-09-16.",
     offers:[
       {shop:"🇸🇪 Elgiganten", spec:'16" · Ultra 7 356H · 32 GB · 1 TB · Windows 11 Pro', price:22989, tag:["t-ok","i lager"], url:"https://www.elgiganten.se/product/datorer-kontor/datorer/laptop/samsung-galaxy-book6-pro-16-u7-356h321024oledwpro-16-copilot-pc/1014158"},
