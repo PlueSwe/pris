@@ -18,6 +18,18 @@ jobs:
     steps:
       - name: Checka ut repot
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full historik behövs för att läsa ändringsdatum per fil
+
+      # Datumet i "Sidan senast ändrad"-pillen sätts från git, så det alltid
+      # matchar när sidans innehåll senast faktiskt ändrades — aldrig handskrivet.
+      - name: Sätt ändringsdatum från git
+        run: |
+          for f in public/*.html; do
+            d=$(git log -1 --format=%cs -- "$f")
+            [ -n "$d" ] && sed -i -E "s#(Sidan senast ändrad <b>)[0-9]{4}-[0-9]{2}-[0-9]{2}#\1${d}#" "$f"
+            echo "$f -> $d"
+          done
 
       - name: Ladda upp public/ via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
