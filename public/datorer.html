@@ -84,7 +84,7 @@
   <p class="sub">Välj en konfiguration — butikspriser visas billigast först. Alla priser <b>inkl. moms</b>, leverans Sverige/EU.</p>
 
   <div class="meta">
-    <span class="pill">Sidan senast ändrad <b>2026-09-04</b></span>
+    <span class="pill">Priser senast uppdaterade <b>2026-09-04</b></span>
     <span class="pill" title="Varje butik kontrolleras vid olika tillfällen — se trendkurvan för mätdatum">Priser kontrollerade <b>löpande</b> per butik</span>
     <span class="pill">Kurs <b>1 € ≈ 11,4 kr</b></span>
     <span class="pill">Krav: mini <b>48 GB</b> · Studio <b>≥ 96 GB</b></span>
@@ -117,51 +117,51 @@ const configs = [
   /* ===== NYA GENERATIONEN (annonserad 25 aug 2026, släpps 22 sept) ===== */
   {
     id:"mini64m5", prod:"Mac mini · NY", chip:"M5 Pro", ram:"64 GB", isNew:true,
-    banner:"🆕 <b>Ny generation — förbeställ, släpps 22 september 2026.</b> M5 Pro har minnesnivåerna 24 och 64 GB (ingen 48 GB), så 64 GB är den som möter ditt krav. <b>M6-modellen klarar max 32 GB</b> och kan därför inte användas alls för ditt behov, trots att den är nyare och billigare (från 11 995 kr).",
-    note:"M5 Pro höjer mini-taket från 48 GB till 64 GB. Den 15-kärniga varianten är 2 600 kr billigare än den 18-kärniga och har samma minne — välj den om du inte behöver extra CPU/GPU-kärnor. Förra generationens M4 Pro 48 GB säljs inte längre hos Apple, MacRent, Macforum eller Inet (kontrollerat 2026-09-16). Scandinavian Photo har M5 Pro men bara i 24 GB (22 490 kr), och MacRent listar M5 Pro utan lagersaldo — 64 GB beställs i praktiken hos Apple.",
+    banner:"🆕 <b>Ny generation — släppt 22 september 2026.</b> M5 Pro har minnesnivåerna 24 och 64 GB (ingen 48 GB), så 64 GB är den som möter ditt krav. <b>M6-modellen klarar max 32 GB</b> och kan därför inte användas alls för ditt behov, trots att den är nyare och billigare (från 11 995 kr).",
+    note:"M5 Pro höjer mini-taket från 48 GB till 64 GB. Den 15-kärniga varianten är 2 600 kr billigare än den 18-kärniga och har samma minne — välj den om du inte behöver extra CPU/GPU-kärnor. Förra generationens M4 Pro 48 GB säljs inte längre hos Apple, MacRent, Macforum eller Inet (kontrollerat 2026-09-23). Scandinavian Photo har M5 Pro men bara i 24 GB (22 490 kr), och MacRent listar M5 Pro utan lagersaldo — 64 GB beställs i praktiken hos Apple.",
     offers:[
-      {shop:"🇸🇪 Apple.se", spec:"M5 Pro 15-k/16-GPU · 64 GB · 512 GB", price:35495, hist:[["2026-09-04",35495]], tag:["t-info","förbeställ · 22 sept"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
-      {shop:"🇸🇪 Apple.se", spec:"M5 Pro 18-k/20-GPU · 64 GB · 512 GB", price:38095, hist:[["2026-09-04",38095]], tag:["t-info","förbeställ · 22 sept"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
+      {shop:"🇸🇪 Apple.se", spec:"M5 Pro 15-k/16-GPU · 64 GB · 512 GB", price:35495, hist:[["2026-09-04",35495]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
+      {shop:"🇸🇪 Apple.se", spec:"M5 Pro 18-k/20-GPU · 64 GB · 512 GB", price:38095, hist:[["2026-09-04",38095]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
       {shop:"🇸🇪 Apple.se", spec:"M6 · max 32 GB — uppfyller EJ kravet", price:11995, tag:["t-out","för lite minne"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
     ]
   },
   {
     id:"max128m5", prod:"Mac Studio · NY", chip:"M5 Max", ram:"128 GB", isNew:true,
-    banner:"🆕 <b>Ny generation — förbeställ, släpps 22 september 2026.</b> Ersätter M4 Max 128 GB, som inte längre säljs någonstans jag kontrollerat. Scandinavian Photo är 5 kr billigare än Apple.",
-    note:"M5 Max har 18-kärnig CPU och upp till 40-kärnig GPU, med minnesnivåer 36/48/64/96/128 GB. Kravet ≥ 96 GB kan alltså nu uppfyllas med 96 GB, men den nivån har ingen butik listat med pris ännu — 128 GB är den som går att förbeställa.",
+    banner:"🆕 <b>Ny generation — släppt 22 september 2026.</b> Scandinavian Photo är restnoterad: 128 GB/1 TB beräknas i lager i slutet av oktober. Ersätter M4 Max 128 GB, som inte längre säljs någonstans jag kontrollerat. Scandinavian Photo är 5 kr billigare än Apple.",
+    note:"M5 Max har 18-kärnig CPU och upp till 40-kärnig GPU, med minnesnivåer 36/48/64/96/128 GB. Kravet ≥ 96 GB kan alltså nu uppfyllas med 96 GB, men den nivån har ingen butik listat med pris ännu — 128 GB är den som går att beställa.",
     offers:[
-      {shop:"🇸🇪 Scandinavian Photo", spec:"M5 Max 18-k/40-GPU · 128 GB · 1 TB", price:70690, hist:[["2026-09-16",70690]], tag:["t-info","förbeställ"], url:"https://www.scandinavianphoto.se/dator/stationara-datorer/mac-studio"},
-      {shop:"🇸🇪 Apple.se", spec:"M5 Max 18-k/40-GPU · 128 GB · 1 TB", price:70695, hist:[["2026-09-04",70695]], tag:["t-info","förbeställ · 22 sept"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
-      {shop:"🇸🇪 Scandinavian Photo", spec:"M5 Max 18-k/40-GPU · 128 GB · 2 TB", price:77190, tag:["t-info","förbeställ"], url:"https://www.scandinavianphoto.se/dator/stationara-datorer/mac-studio"},
+      {shop:"🇸🇪 Scandinavian Photo", spec:"M5 Max 18-k/40-GPU · 128 GB · 1 TB", price:70690, hist:[["2026-09-16",70690],["2026-09-23",70690]], tag:["t-warn","restnoterad · lager sent okt"], url:"https://www.scandinavianphoto.se/dator/stationara-datorer/mac-studio"},
+      {shop:"🇸🇪 Apple.se", spec:"M5 Max 18-k/40-GPU · 128 GB · 1 TB", price:70695, hist:[["2026-09-04",70695]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
+      {shop:"🇸🇪 Scandinavian Photo", spec:"M5 Max 18-k/40-GPU · 128 GB · 2 TB", price:77190, tag:["t-warn","restnoterad · 10–20 dgr efter lager"], url:"https://www.scandinavianphoto.se/dator/stationara-datorer/mac-studio"},
       {shop:"🇸🇪 Apple.se", spec:"M5 Max bas · 36 GB · 512 GB (referens)", price:32995, tag:["t-out","för lite minne"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
     ]
   },
   {
     id:"ultra96m5", prod:"Mac Studio · NY", chip:"M5 Ultra", ram:"96 GB", isNew:true,
-    banner:"🆕 <b>Ny generation — förbeställ, släpps 22 september 2026.</b> Basmodellen av M5 Ultra har 96 GB, alltså precis ditt minimikrav.",
-    note:"Förra generationens M3 Ultra 96 GB (69 995 kr) är utgången hos Apple, Dustin, Inet och Elgiganten (kontrollerat 2026-09-16). M5 Ultra 96 GB kostar 3 000 kr mer men har ett betydligt snabbare chip. Scandinavian Photos basvariant har 30-kärnig CPU och 64-kärnig GPU.",
+    banner:"🆕 <b>Ny generation — släppt 22 september 2026.</b> Scandinavian Photo har den restnoterad med okänd leveranstid. Basmodellen av M5 Ultra har 96 GB, alltså precis ditt minimikrav.",
+    note:"Förra generationens M3 Ultra 96 GB (69 995 kr) är utgången hos Apple, Dustin, Inet och Elgiganten (kontrollerat 2026-09-23). M5 Ultra 96 GB kostar 3 000 kr mer men har ett betydligt snabbare chip. Scandinavian Photos basvariant har 30-kärnig CPU och 64-kärnig GPU.",
     offers:[
-      {shop:"🇸🇪 Scandinavian Photo", spec:"M5 Ultra 30-k/64-GPU · 96 GB · 1 TB", price:72990, hist:[["2026-09-16",72990]], tag:["t-info","förbeställ"], url:"https://www.scandinavianphoto.se/dator/stationara-datorer/mac-studio"},
-      {shop:"🇸🇪 Apple.se", spec:"M5 Ultra · 96 GB · 1 TB (bas)", price:72995, hist:[["2026-09-04",72995]], tag:["t-info","förbeställ · 22 sept"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
+      {shop:"🇸🇪 Scandinavian Photo", spec:"M5 Ultra 30-k/64-GPU · 96 GB · 1 TB", price:72990, hist:[["2026-09-16",72990],["2026-09-23",72990]], tag:["t-warn","restnoterad · okänd leveranstid"], url:"https://www.scandinavianphoto.se/dator/stationara-datorer/mac-studio"},
+      {shop:"🇸🇪 Apple.se", spec:"M5 Ultra · 96 GB · 1 TB (bas)", price:72995, hist:[["2026-09-04",72995]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
     ]
   },
   {
     id:"ultra256m5", prod:"Mac Studio · NY", chip:"M5 Ultra", ram:"256 GB", isNew:true,
     banner:"🆕 <b>256 GB går att köpa nytt igen</b> — för <b>141 895 kr</b>, ca 70 000 kr under vad begagnade M3 Ultra 256 GB kostade på eBay. Därför är den begagnade M3 Ultra 256 GB-sektionen borttagen. <b>512 GB kommer i slutet av oktober.</b>",
-    note:"Efter DRAM-bristen som fick Apple att stryka 256 och 512 GB på M3 Ultra är båda nivåerna tillbaka med M5 Ultra. 256 GB kan förbeställas nu (levereras 22 sept); 512 GB släpps i slutet av oktober och pris för den nivån är ännu inte publicerat.",
+    note:"Efter DRAM-bristen som fick Apple att stryka 256 och 512 GB på M3 Ultra är båda nivåerna tillbaka med M5 Ultra. 256 GB går att beställa nu; 512 GB släpps i slutet av oktober och pris för den nivån är ännu inte publicerat.",
     offers:[
-      {shop:"🇸🇪 Apple.se", spec:"M5 Ultra 36-k/80-GPU · 256 GB · 1 TB", price:141895, hist:[["2026-09-04",141895]], tag:["t-info","förbeställ · 22 sept"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
+      {shop:"🇸🇪 Apple.se", spec:"M5 Ultra 36-k/80-GPU · 256 GB · 1 TB", price:141895, hist:[["2026-09-04",141895]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
       {shop:"🇸🇪 Apple.se", spec:"M5 Ultra · 512 GB — pris ej publicerat", price:null, tag:["t-warn","kommer sent okt"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
     ]
   },
 
   /* ===== FÖREGÅENDE GENERATION — endast det som fortfarande går att köpa =====
      M4 Pro-mini, M4 Max och M3 Ultra 96/256 GB är borttagna eller utgångna hos alla
-     svenska butiker (kontrollerat 2026-09-16), så de konfigurationerna är borttagna. */
+     svenska butiker (kontrollerat 2026-09-23), så de konfigurationerna är borttagna. */
   {
     id:"ultra512", prod:"Mac Studio", chip:"M3 Ultra", ram:"512 GB", used:true, subLabel:"begagnat · vänta?",
     banner:"⏳ <b>Överväg att vänta till slutet av oktober.</b> Då släpper Apple M5 Ultra med 512 GB — nytt, med garanti och ett betydligt snabbare chip. M5 Ultra 256 GB kostar 141 895 kr nytt, så 512 GB lär hamna långt under de ~340 000–410 000 kr som begagnade M3 Ultra 512 GB kostar nu. De höga begagnatpriserna är en bristpremie från när Apple drog 512 GB i mars.",
-    note:"Endast verifierad säljare: MacforPro (franskt företag, moms-nr FR00802746388, 100 % på 264 omdömen). EU-frakt = ingen tull/importmoms. Ingen ångerrätt — eBay Köpskydd gäller. Kräver 32-k CPU/80-GPU-chippet. Kontrollerat 2026-09-16: 2 TB-annonsen har sänkts till €29 999 och är nu billigare än 1 TB-annonsen.",
+    note:"Endast verifierad säljare: MacforPro (franskt företag, moms-nr FR00802746388, 100 % på 264 omdömen). EU-frakt = ingen tull/importmoms. Ingen ångerrätt — eBay Köpskydd gäller. Kräver 32-k CPU/80-GPU-chippet. Kontrollerat 2026-09-23: 2 TB-annonsen har sänkts till €29 999 och är nu billigare än 1 TB-annonsen.",
     offers:[
       {shop:"🇫🇷 MacforPro (eBay)", spec:"32-k/80-GPU · 512 GB · 2 TB · begagnat · 4 i lager", price:343800, hist:[["2026-08-05",389400],["2026-09-16",343800]], orig:"€29 999 + 155 frakt", tag:["t-used","sänkt −12 %"], url:"https://www.ebay.de/itm/397987365210"},
       {shop:"🇫🇷 MacforPro (eBay)", spec:"32-k/80-GPU · 512 GB · 1 TB · ny öppnad · 10 i lager", price:378000, hist:[["2026-08-05",378000],["2026-08-07",378000],["2026-09-16",378000]], orig:"€32 999 + 155 frakt", tag:["t-ok","VERIFIERAD"], url:"https://www.ebay.de/itm/397948558914"},

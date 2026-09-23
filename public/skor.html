@@ -97,7 +97,7 @@
   <div class="meta">
     <span class="pill">Kurs <b>1 € = <input id="rate" class="ctrl" type="number" step="0.1" value="11.4"></b> kr</span>
     <span class="pill">Kurs <b>1 £ = <input id="rateGbp" class="ctrl" type="number" step="0.1" value="13.4"></b> kr</span>
-    <span class="pill">Sidan senast ändrad <b>2026-08-17</b></span>
+    <span class="pill">Priser senast uppdaterade <b>2026-08-17</b></span>
     <span class="pill" title="Varje butik kontrolleras vid olika tillfällen — se trendkurvan för mätdatum">Priser kontrollerade <b>löpande</b> per butik</span>
     <span class="pill">Betyg: <b>Trustpilot</b> (där angivet)</span>
     <span class="pill" id="lowPill"></span>
@@ -145,7 +145,7 @@
   </table>
 
   <div class="secondary">
-    <h2>Slut eller borttagna — Clifton 10 (kontrollerat 2026-09-16)</h2>
+    <h2>Slut eller borttagna — Clifton 10 (kontrollerat 2026-09-23)</h2>
     <div class="chips" id="chips"></div>
   </div>
 
@@ -159,21 +159,20 @@
 /* ====== REDIGERA HÄR: priser & betyg. priceSek används för svenska butiker,
    annars räknas priceEur om med växelkursen ovan. ====== */
 const data = [
-  /* ===== CLIFTON 10 – kontrollerat 2026-09-16. Endast butiker där varan går att köpa.
+  /* ===== CLIFTON 10 – kontrollerat 2026-09-23. Endast butiker där varan går att köpa.
      Modellen fasas ut: de flesta butiker är slut, se listan "Slut eller borttagna" nedan. ===== */
   {model:"Clifton 10", name:"Geizhals",       dom:"geizhals.de · prisjämf.",    flag:"🇩🇪", priceEur:95.97,  type:"compare",  rating:null, count:null, url:"https://geizhals.de/hoka-clifton-10-herren-v197431.html"},
-  {model:"Clifton 10", name:"Idealo",         dom:"idealo.es · prisjämf.",      flag:"🇪🇸", priceEur:95.97,  type:"compare",  rating:null, count:null, url:"https://www.idealo.es/precios/206295585/hoka-clifton-10-1162030.html"},
+  {model:"Clifton 10", name:"Idealo",         dom:"idealo.es · prisjämf.",      flag:"🇪🇸", priceEur:88,  type:"compare",  rating:null, count:null, url:"https://www.idealo.es/precios/206295585/hoka-clifton-10-1162030.html"},
   {model:"Clifton 10", name:"Runnea",         dom:"runnea.com · prisjämf.",     flag:"🇪🇸", priceEur:104.99, type:"compare",  rating:null, count:null, url:"https://www.runnea.com/zapatillas-running/hoka/clifton-10/1043777/precios/todas/"},
-  {model:"Clifton 10", name:"Bergfreunde",    dom:"bergfreunde.se · 1 av 91 varianter i lager", flag:"🇸🇪", priceEur:95.97, camp:"−40 %", type:"shop", rating:5.0, count:9718, url:"https://www.bergfreunde.se/hoka-clifton-10-springskor/"},
   {model:"Clifton 10", name:"Vigliettisport", dom:"vigliettisport.com · vissa storlekar slut", flag:"🇮🇹", priceEur:109.00, camp:"−31 %", type:"shop", rating:null, count:null, url:"https://www.vigliettisport.com/it/1095-sport/1159-running-e-trail/1670-scarpe-strada/56524-scarpe-clifton-10-running.html"},
   {model:"Clifton 10", name:"Passsport",      dom:"passsport.it · i lager",     flag:"🇮🇹", priceEur:119.00, type:"shop",     rating:null, count:null, url:"https://www.passsport.it/hoka-clifton-10-20545"},
   {model:"Clifton 10", name:"Löplabbet",      dom:"loplabbet.se · i lager",     flag:"🇸🇪", priceSek:1499,   camp:"−29 %", type:"shop", rating:null, count:null, url:"https://www.loplabbet.se/loparskor/distans/hoka-one-one-clifton-10-loparskor-herr/black-white"},
   {model:"Clifton 10", name:"XXL",            dom:"xxl.se · i lager",           flag:"🇸🇪", priceSek:1999,   type:"shop",     rating:null, count:null, url:"https://www.xxl.se/hoka-clifton-10-loparskor-herr-svart/p/1242290_1_Style"},
   {model:"Clifton 10", name:"Intersport",     dom:"intersport.se · vissa storlekar slut", flag:"🇸🇪", priceSek:2099, type:"shop", rating:null, count:null, url:"https://www.intersport.se/skor/loparskor/neutral/hoka-one-one-clifton-10-m-loparskor-herr/black-white"},
 
-  /* ===== CLIFTON 11 – kontrollerat 2026-09-16. HOKA:s egna butiker blockerar
+  /* ===== CLIFTON 11 – kontrollerat 2026-09-23. HOKA:s egna butiker blockerar
      automatisk läsning; deras priser är senast kontrollerade 2026-08-10. ===== */
-  {model:"Clifton 11", name:"Bergfreunde",    dom:"bergfreunde.se · Clifton 11", flag:"🇸🇪", priceEur:145.55, camp:"−9 %", type:"shop", rating:5.0, count:9718, url:"https://www.bergfreunde.se/hoka-clifton-11-springskor/"},
+  {model:"Clifton 11", name:"Bergfreunde",    dom:"bergfreunde.se · Clifton 11", flag:"🇸🇪", priceEur:140.76, camp:"−9 %", type:"shop", rating:5.0, count:9718, url:"https://www.bergfreunde.se/hoka-clifton-11-springskor/"},
   {model:"Clifton 11", name:"SportsShoes",    dom:"sportsshoes.com · Clifton 11", flag:"🇬🇧", priceGbp:125.99, camp:"−10 %", type:"shop", rating:null, count:null, url:"https://www.sportsshoes.com/store/hoka-clifton"},
   {model:"Clifton 11", name:"Intersport",     dom:"intersport.se · vissa storlekar slut", flag:"🇸🇪", priceSek:1999, type:"shop", rating:null, count:null, url:"https://www.intersport.se/products/hoka-one-one-clifton-11-m-loparskor-herr/frost-black-162601604"},
   {model:"Clifton 11", name:"The Running Company", dom:"therunningcompany.se · 5 av 7 storlekar", flag:"🇸🇪", priceSek:1999, type:"shop", rating:null, count:null, url:"https://www.therunningcompany.se/products/hoka-m-clifton-11-flck"},
@@ -181,8 +180,9 @@ const data = [
   {model:"Clifton 11", name:"HOKA (officiell, DE)",dom:"hoka.com · tyskt listpris", flag:"🇩🇪", priceEur:160.00, type:"official", rating:null, count:null, url:"https://www.hoka.com/de/de/herren-strasse/clifton-11/1176572.html"},
 ];
 
-/* Butiker som tidigare hade Clifton 10 men som är slut eller har tagit bort den (kontrollerat 2026-09-16) */
+/* Butiker som tidigare hade Clifton 10 men som är slut eller har tagit bort den (kontrollerat 2026-09-23) */
 const more = [
+  {name:"Bergfreunde",  flag:"🇸🇪", src:"kan ej längre levereras (23/9)", url:"https://www.bergfreunde.se/hoka-clifton-10-springskor/"},
   {name:"SportsShoes",  flag:"🇬🇧", src:"borttagen ur sortimentet", url:"https://www.sportsshoes.com/store/hoka-clifton"},
   {name:"Deporvillage", flag:"🇪🇸", src:"slut (124,95 €)", url:"https://www.deporvillage.com/zapatillas-hoka-clifton-10-negro-blanco"},
   {name:"Löparshop",    flag:"🇸🇪", src:"ej i lager", url:"https://www.loparshop.se/hoka-men-s-clifton-10-1162030-bblc.html"},
@@ -230,12 +230,12 @@ function saveSnapshot(){
 /* Verklig observerad prishistorik (SEK), seedas in i trendgrafen */
 const SEED={
   "geizhals.de · prisjämf.":[["2026-06-29",1134],["2026-08-07",1093],["2026-09-16",1094]],
-  "idealo.es · prisjämf.":[["2026-06-29",1139],["2026-09-16",1094]],
+  "idealo.es · prisjämf.":[["2026-06-29",1139],["2026-09-16",1094],["2026-09-23",1003]],
   "runnea.com · prisjämf.":[["2026-06-29",1082],["2026-08-07",1197],["2026-09-16",1197]],
   "bergfreunde.se · 1 av 91 varianter i lager":[["2026-06-29",1459],["2026-08-07",1276],["2026-09-16",1094]],
   "vigliettisport.com · vissa storlekar slut":[["2026-06-29",1357],["2026-09-16",1243]],
   "passsport.it · i lager":[["2026-06-29",1642],["2026-09-16",1357]],
-  "bergfreunde.se · Clifton 11":[["2026-08-12",1732],["2026-09-16",1659]],
+  "bergfreunde.se · Clifton 11":[["2026-08-12",1732],["2026-09-16",1659],["2026-09-23",1605]],
   "sportsshoes.com · Clifton 11":[["2026-08-07",1876],["2026-09-16",1688]],
 };
 function sparkline(d){

@@ -1,0 +1,50 @@
+name: Daglig prisuppdatering
+
+# Hämtar butikernas priser varje natt och committar det som ändrats.
+# Körs 03:30 UTC — före deploy-flödets dagliga körning 05:00 UTC, som
+# laddar upp resultatet och sätter datumet i "Priser senast uppdaterade".
+on:
+  schedule:
+    - cron: '30 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: priser
+  cancel-in-progress: false
+
+jobs:
+  priser:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checka ut repot
+        uses: actions/checkout@v4
+
+      - name: Installera Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Läs om priserna hos butikerna
+        run: node scripts/update-prices.mjs | tee rapport.txt
+
+      - name: Visa rapporten i körningens sammanfattning
+        if: always()
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          cat rapport.txt >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Committa ändrade priser
+        run: |
+          rm -f rapport.txt
+          if git diff --quiet -- public; then
+            echo "Inga prisändringar i dag."
+            exit 0
+          fi
+          git config user.name "PlueSwe"
+          git config user.email "chilijoakim@gmail.com"
+          git commit -am "Daglig prisuppdatering $(date -u +%F)"
+          git push
