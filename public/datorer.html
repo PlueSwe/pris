@@ -87,7 +87,7 @@
     <span class="pill">Priser senast uppdaterade <b>2026-09-04</b></span>
     <span class="pill" title="Varje butik kontrolleras vid olika tillfällen — se trendkurvan för mätdatum">Priser kontrollerade <b>löpande</b> per butik</span>
     <span class="pill">Kurs <b>1 € ≈ 11,4 kr</b></span>
-    <span class="pill">Krav: mini <b>48 GB</b> · Studio <b>≥ 96 GB</b></span>
+    <span class="pill">Krav: mini <b>≥ 48 GB</b> · Studio <b>≥ 96 GB</b> — M6 med 32 GB visas som jämförelse</span>
   </div>
 
   <div class="configs" id="configs"></div>
@@ -105,7 +105,7 @@
   <p class="cfgnote" id="cfgnote"></p>
 
   <footer>
-    <p>Priserna kontrolleras butik för butik vid olika tillfällen — hovra över en trendkurva för att se vilka datum just den butiken mätts. Senaste genomgång av alla butiker: 2026-09-16. Förra generationen (M4 Pro, M4 Max, M3 Ultra 96/256 GB) är borttagen från sidan eftersom ingen svensk butik längre säljer den. "≈" = omräknat från EUR. Begagnatpriser (eBay) ändras dagligen — endast säljare med gediget track record listas; misstänkt billiga annonser är exkluderade.</p>
+    <p>Priserna kontrolleras butik för butik vid olika tillfällen — hovra över en trendkurva för att se vilka datum just den butiken mätts. Senaste genomgång av alla butiker: 2026-09-23. Mac mini M6 är tillagd som egen sektion trots att den bara tar 32 GB, och M5 Pro finns nu även med 48 GB. Förra generationen (M4 Pro, M4 Max, M3 Ultra 96/256 GB) är borttagen från sidan eftersom ingen svensk butik längre säljer den. "≈" = omräknat från EUR. Begagnatpriser (eBay) ändras dagligen — endast säljare med gediget track record listas; misstänkt billiga annonser är exkluderade.</p>
   </footer>
 </div>
 
@@ -116,13 +116,24 @@ const fmt = n => n.toLocaleString("sv-SE") + " kr";
 const configs = [
   /* ===== NYA GENERATIONEN (annonserad 25 aug 2026, släpps 22 sept) ===== */
   {
-    id:"mini64m5", prod:"Mac mini · NY", chip:"M5 Pro", ram:"64 GB", isNew:true,
-    banner:"🆕 <b>Ny generation — släppt 22 september 2026.</b> M5 Pro har minnesnivåerna 24 och 64 GB (ingen 48 GB), så 64 GB är den som möter ditt krav. <b>M6-modellen klarar max 32 GB</b> och kan därför inte användas alls för ditt behov, trots att den är nyare och billigare (från 11 995 kr).",
-    note:"M5 Pro höjer mini-taket från 48 GB till 64 GB. Den 15-kärniga varianten är 2 600 kr billigare än den 18-kärniga och har samma minne — välj den om du inte behöver extra CPU/GPU-kärnor. Förra generationens M4 Pro 48 GB säljs inte längre hos Apple, MacRent, Macforum eller Inet (kontrollerat 2026-09-23). Scandinavian Photo har M5 Pro men bara i 24 GB (22 490 kr), och MacRent listar M5 Pro utan lagersaldo — 64 GB beställs i praktiken hos Apple.",
+    id:"mini64m5", prod:"Mac mini · NY", chip:"M5 Pro", ram:"48–64 GB", isNew:true,
+    banner:"🆕 <b>Släppt 22 september 2026 — och 48 GB finns nu.</b> Apple har lagt till 48 GB på M5 Pro (fanns inte vid förra genomgången), så <b>30 295 kr</b> räcker för ditt minimikrav i stället för 35 495 kr. Vill du ha M6-chippet i stället finns det längre ned — men det tar max 32 GB.",
+    note:"M5 Pro går att få med 24, 48 eller 64 GB. Den 15-kärniga varianten är 2 600 kr billigare än den 18-kärniga och har samma minne — välj den om du inte behöver extra CPU/GPU-kärnor. Alla priser nedan har 512 GB lagring; 1 TB kostar 3 900 kr extra. Förra generationens M4 Pro 48 GB säljs inte längre hos Apple, MacRent, Macforum eller Inet (kontrollerat 2026-09-23). Scandinavian Photo har M5 Pro men bara i 24 GB (22 490 kr), och MacRent listar M5 Pro utan lagersaldo — 64 GB beställs i praktiken hos Apple.",
     offers:[
+      {shop:"🇸🇪 Apple.se", spec:"M5 Pro 15-k/16-GPU · 48 GB · 512 GB", price:30295, hist:[["2026-09-23",30295]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
       {shop:"🇸🇪 Apple.se", spec:"M5 Pro 15-k/16-GPU · 64 GB · 512 GB", price:35495, hist:[["2026-09-04",35495]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
       {shop:"🇸🇪 Apple.se", spec:"M5 Pro 18-k/20-GPU · 64 GB · 512 GB", price:38095, hist:[["2026-09-04",38095]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
-      {shop:"🇸🇪 Apple.se", spec:"M6 · max 32 GB — uppfyller EJ kravet", price:11995, tag:["t-out","för lite minne"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
+    ]
+  },
+  {
+    id:"mini32m6", prod:"Mac mini · NY", chip:"M6", ram:"32 GB (max)", isNew:true,
+    banner:"ℹ️ <b>M6 är det nyaste chippet, men taket är 32 GB.</b> Det ligger under ditt krav på minst 48 GB — med här för att det är minin som är billigast per prestanda, och för att skillnaden mot M5 Pro ska synas. Behöver du mer minne är M5 Pro ovanför enda vägen.",
+    note:"M6 (12-kärnig processor, 12-kärnig grafik, dubbel 16-kärnig Neural Engine) med minnesnivåerna 16, 24 och 32 GB. Basmodellen kostar 11 995 kr med 16 GB och 256 GB lagring; 32 GB kostar 5 200 kr extra och 1 TB lagring 6 500 kr. Scandinavian Photo är några kronor billigare än Apple men restnoterad på båda 32 GB-varianterna. Kontrollerat 2026-09-23.",
+    offers:[
+      {shop:"🇸🇪 Scandinavian Photo", spec:"M6 12-k/12-GPU · 32 GB · 256 GB", price:17190, hist:[["2026-09-23",17190]], tag:["t-warn","restnoterad · lager sent okt"], url:"https://www.scandinavianphoto.se/apple/mac-mini--m6-12-core-cpu-12-core-gpu-32gb-ram-256gb-ssd-1107529"},
+      {shop:"🇸🇪 Apple.se", spec:"M6 12-k/12-GPU · 32 GB · 256 GB", price:17195, hist:[["2026-09-23",17195]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
+      {shop:"🇸🇪 Scandinavian Photo", spec:"M6 12-k/12-GPU · 32 GB · 1 TB", price:23690, hist:[["2026-09-23",23690]], tag:["t-warn","restnoterad · lager tidigt nov"], url:"https://www.scandinavianphoto.se/apple/mac-mini--m6-12-core-cpu-12-core-gpu-32gb-ram-1tb-ssd-1107531"},
+      {shop:"🇸🇪 Apple.se", spec:"M6 12-k/12-GPU · 32 GB · 1 TB", price:23695, hist:[["2026-09-23",23695]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
     ]
   },
   {
