@@ -105,7 +105,7 @@
   <p class="cfgnote" id="cfgnote"></p>
 
   <footer>
-    <p>Priserna kontrolleras butik för butik vid olika tillfällen — hovra över en trendkurva för att se vilka datum just den butiken mätts. Senaste genomgång av alla butiker: 2026-09-23. Mac mini M6 är tillagd som egen sektion trots att den bara tar 32 GB, och M5 Pro finns nu även med 48 GB. Förra generationen (M4 Pro, M4 Max, M3 Ultra 96/256 GB) är borttagen från sidan eftersom ingen svensk butik längre säljer den. "≈" = omräknat från EUR. Begagnatpriser (eBay) ändras dagligen — endast säljare med gediget track record listas; misstänkt billiga annonser är exkluderade.</p>
+    <p>Priserna kontrolleras butik för butik vid olika tillfällen — hovra över en trendkurva för att se vilka datum just den butiken mätts. Senaste genomgång av alla butiker: 2026-09-30. M5 Pro-minin är uppdelad i 48 GB och 64 GB. Hela förra generationen är borttagen från sidan: M4 Pro, M4 Max och M3 Ultra i alla minnesstorlekar, inklusive de begagnade 512 GB-annonserna på eBay — vänta på M5 Ultra 512 GB i stället. Förra generationen (M4 Pro, M4 Max, M3 Ultra 96/256 GB) är borttagen från sidan eftersom ingen svensk butik längre säljer den. Sidan visar nu bara nya datorer från svenska butiker — inga begagnatannonser.</p>
   </footer>
 </div>
 
@@ -116,13 +116,21 @@ const fmt = n => n.toLocaleString("sv-SE") + " kr";
 const configs = [
   /* ===== NYA GENERATIONEN (annonserad 25 aug 2026, släpps 22 sept) ===== */
   {
-    id:"mini64m5", prod:"Mac mini · NY", chip:"M5 Pro", ram:"48–64 GB", isNew:true,
-    banner:"🆕 <b>Släppt 22 september 2026 — och 48 GB finns nu.</b> Apple har lagt till 48 GB på M5 Pro (fanns inte vid förra genomgången), så <b>30 295 kr</b> räcker för ditt minimikrav i stället för 35 495 kr. Vill du ha M6-chippet i stället finns det längre ned — men det tar max 32 GB.",
-    note:"M5 Pro går att få med 24, 48 eller 64 GB. Den 15-kärniga varianten är 2 600 kr billigare än den 18-kärniga och har samma minne — välj den om du inte behöver extra CPU/GPU-kärnor. Alla priser nedan har 512 GB lagring; 1 TB kostar 3 900 kr extra. Förra generationens M4 Pro 48 GB säljs inte längre hos Apple, MacRent, Macforum eller Inet (kontrollerat 2026-09-23). Scandinavian Photo har M5 Pro men bara i 24 GB (22 490 kr), och MacRent listar M5 Pro utan lagersaldo — 64 GB beställs i praktiken hos Apple.",
+    id:"mini48m5", prod:"Mac mini · NY", chip:"M5 Pro", ram:"48 GB", isNew:true,
+    banner:"🆕 <b>Billigaste minin som klarar ditt krav.</b> Apple lade till 48 GB på M5 Pro i samband med släppet 22 september — <b>30 295 kr</b> i stället för 35 495 kr för 64 GB. Räcker 48 GB är det 5 200 kr sparade.",
+    note:"M5 Pro med 48 GB och 512 GB lagring. Den 15-kärniga varianten har samma minne och samma lagring som den 18-kärniga — de 2 600 kronorna extra ger bara fler processor- och grafikkärnor. 1 TB lagring kostar 3 900 kr extra. Scandinavian Photo säljer M5 Pro-minin men bara med 24 GB (22 490 kr), och MacRent listar den utan lagersaldo, så 48 GB beställs hos Apple. Kontrollerat 2026-09-30.",
     offers:[
-      {shop:"🇸🇪 Apple.se", spec:"M5 Pro 15-k/16-GPU · 48 GB · 512 GB", price:30295, hist:[["2026-09-23",30295]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
-      {shop:"🇸🇪 Apple.se", spec:"M5 Pro 15-k/16-GPU · 64 GB · 512 GB", price:35495, hist:[["2026-09-04",35495]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
-      {shop:"🇸🇪 Apple.se", spec:"M5 Pro 18-k/20-GPU · 64 GB · 512 GB", price:38095, hist:[["2026-09-04",38095]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
+      {shop:"🇸🇪 Apple.se", spec:"M5 Pro 15-k/16-GPU · 48 GB · 512 GB", price:30295, hist:[["2026-09-23",30295],["2026-09-30",30295]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
+      {shop:"🇸🇪 Apple.se", spec:"M5 Pro 18-k/20-GPU · 48 GB · 512 GB", price:32895, hist:[["2026-09-30",32895]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
+    ]
+  },
+  {
+    id:"mini64m5", prod:"Mac mini · NY", chip:"M5 Pro", ram:"64 GB", isNew:true,
+    banner:"🆕 <b>Mest minne som går att få i en Mac mini.</b> 64 GB kostar 5 200 kr mer än 48 GB-varianten ovanför. Behöver du inte minnet är 48 GB samma dator i övrigt.",
+    note:"M5 Pro med 64 GB och 512 GB lagring. Förra generationens M4 Pro med 48 GB säljs inte längre hos Apple, MacRent, Macforum eller Inet. 1 TB lagring kostar 3 900 kr extra. Kontrollerat 2026-09-30.",
+    offers:[
+      {shop:"🇸🇪 Apple.se", spec:"M5 Pro 15-k/16-GPU · 64 GB · 512 GB", price:35495, hist:[["2026-09-04",35495],["2026-09-30",35495]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
+      {shop:"🇸🇪 Apple.se", spec:"M5 Pro 18-k/20-GPU · 64 GB · 512 GB", price:38095, hist:[["2026-09-04",38095],["2026-09-30",38095]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-mini"},
     ]
   },
   {
@@ -158,7 +166,7 @@ const configs = [
   },
   {
     id:"ultra256m5", prod:"Mac Studio · NY", chip:"M5 Ultra", ram:"256 GB", isNew:true,
-    banner:"🆕 <b>256 GB går att köpa nytt igen</b> — för <b>141 895 kr</b>, ca 70 000 kr under vad begagnade M3 Ultra 256 GB kostade på eBay. Därför är den begagnade M3 Ultra 256 GB-sektionen borttagen. <b>512 GB kommer i slutet av oktober.</b>",
+    banner:"🆕 <b>256 GB går att köpa nytt igen</b> — för <b>141 895 kr</b>, ca 70 000 kr under vad begagnade M3 Ultra 256 GB kostade på eBay. Därför är de begagnade M3 Ultra-sektionerna borttagna — även 512 GB, som kostade 343 800–378 000 kr på eBay. <b>M5 Ultra med 512 GB kommer i slutet av oktober.</b>",
     note:"Efter DRAM-bristen som fick Apple att stryka 256 och 512 GB på M3 Ultra är båda nivåerna tillbaka med M5 Ultra. 256 GB går att beställa nu; 512 GB släpps i slutet av oktober och pris för den nivån är ännu inte publicerat.",
     offers:[
       {shop:"🇸🇪 Apple.se", spec:"M5 Ultra 36-k/80-GPU · 256 GB · 1 TB", price:141895, hist:[["2026-09-04",141895]], tag:["t-ok","går att beställa"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
@@ -166,19 +174,6 @@ const configs = [
     ]
   },
 
-  /* ===== FÖREGÅENDE GENERATION — endast det som fortfarande går att köpa =====
-     M4 Pro-mini, M4 Max och M3 Ultra 96/256 GB är borttagna eller utgångna hos alla
-     svenska butiker (kontrollerat 2026-09-23), så de konfigurationerna är borttagna. */
-  {
-    id:"ultra512", prod:"Mac Studio", chip:"M3 Ultra", ram:"512 GB", used:true, subLabel:"begagnat · vänta?",
-    banner:"⏳ <b>Överväg att vänta till slutet av oktober.</b> Då släpper Apple M5 Ultra med 512 GB — nytt, med garanti och ett betydligt snabbare chip. M5 Ultra 256 GB kostar 141 895 kr nytt, så 512 GB lär hamna långt under de ~340 000–410 000 kr som begagnade M3 Ultra 512 GB kostar nu. De höga begagnatpriserna är en bristpremie från när Apple drog 512 GB i mars.",
-    note:"Endast verifierad säljare: MacforPro (franskt företag, moms-nr FR00802746388, 100 % på 264 omdömen). EU-frakt = ingen tull/importmoms. Ingen ångerrätt — eBay Köpskydd gäller. Kräver 32-k CPU/80-GPU-chippet. Kontrollerat 2026-09-23: 2 TB-annonsen har sänkts till €29 999 och är nu billigare än 1 TB-annonsen.",
-    offers:[
-      {shop:"🇫🇷 MacforPro (eBay)", spec:"32-k/80-GPU · 512 GB · 2 TB · begagnat · 4 i lager", price:343800, hist:[["2026-08-05",389400],["2026-09-16",343800]], orig:"€29 999 + 155 frakt", tag:["t-used","sänkt −12 %"], url:"https://www.ebay.de/itm/397987365210"},
-      {shop:"🇫🇷 MacforPro (eBay)", spec:"32-k/80-GPU · 512 GB · 1 TB · ny öppnad · 10 i lager", price:378000, hist:[["2026-08-05",378000],["2026-08-07",378000],["2026-09-16",378000]], orig:"€32 999 + 155 frakt", tag:["t-ok","VERIFIERAD"], url:"https://www.ebay.de/itm/397948558914"},
-      {shop:"🇸🇪 Apple.se", spec:"M5 Ultra · 512 GB · nytt — pris ej publicerat", price:null, tag:["t-warn","kommer sent okt"], url:"https://www.apple.com/se/shop/buy-mac/mac-studio"},
-    ]
-  },
 ];
 
 /* Översiktsgraf: lägsta pris per datum över alla butiker i konfigurationen */
