@@ -66,7 +66,6 @@
   .rate .num{font-size:12px;color:var(--muted)}
   .tag{display:inline-block;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.4px}
   .tag.official{background:rgba(79,157,255,.15);color:#7db8ff}
-  .tag.compare{background:rgba(124,92,255,.16);color:#b4a3ff}
   .tag.shop{background:rgba(46,160,67,.15);color:#5dd47a}
   .tag.warn{background:rgba(229,83,75,.16);color:#ff8a82}
   a.go{color:var(--accent);text-decoration:none;font-weight:600;font-size:13px;white-space:nowrap}
@@ -145,12 +144,12 @@
   </table>
 
   <div class="secondary">
-    <h2>Slut eller borttagna — Clifton 10 (kontrollerat 2026-09-23)</h2>
+    <h2>Slut eller borttagna — Clifton 10 (kontrollerat 2026-11-16)</h2>
     <div class="chips" id="chips"></div>
   </div>
 
   <footer>
-    <p><b>Så funkar pristrenden:</b> Klicka <b>📌 Spara dagens priser</b> för att lagra en ögonblicksbild lokalt (i din webbläsare via localStorage). Nästa gång priserna ändras: uppdatera siffrorna i <code>data</code>-listan högst upp i denna fil, öppna sidan och spara igen — minigrafen i kolumnen <b>Trend</b> växer för varje sparad dag.</p>
+    <p><b>Senaste genomgång av alla butiker: 2026-11-16.</b> Priserna läses om varje natt direkt ur butikernas egen produktdata; trendkurvan i kolumnen <b>Trend</b> får en punkt varje gång ett pris ändras. Sidan listar bara butiker där skon går att köpa — prisjämförelsesajterna Geizhals, Idealo och Runnea är borttagna eftersom man inte kan handla där. HOKA:s egna butiker blockerar all automatisk kontroll, så deras rader är märkta med det och visar listpris.</p>
   </footer>
 </div>
 
@@ -160,7 +159,6 @@
 const data = [
   /* ===== CLIFTON 10 – kontrollerat 2026-09-23. Endast butiker där varan går att köpa.
      Modellen fasas ut: de flesta butiker är slut, se listan "Slut eller borttagna" nedan. ===== */
-  {model:"Clifton 10", name:"Idealo",         dom:"idealo.es · prisjämf.",      flag:"🇪🇸", priceEur:92.93,  type:"compare",  rating:null, count:null, url:"https://www.idealo.es/precios/206295585/hoka-clifton-10-1162030.html"},
   {model:"Clifton 10", name:"Vigliettisport", dom:"vigliettisport.com · vissa storlekar slut", flag:"🇮🇹", priceEur:109.00, camp:"−31 %", type:"shop", rating:null, count:null, url:"https://www.vigliettisport.com/it/1095-sport/1159-running-e-trail/1670-scarpe-strada/56524-scarpe-clifton-10-running.html"},
   {model:"Clifton 10", name:"Passsport",      dom:"passsport.it · i lager",     flag:"🇮🇹", priceEur:119.00, type:"shop",     rating:null, count:null, url:"https://www.passsport.it/hoka-clifton-10-20545"},
   {model:"Clifton 10", name:"XXL",            dom:"xxl.se · i lager",           flag:"🇸🇪", priceSek:1999,   type:"shop",     rating:null, count:null, url:"https://www.xxl.se/hoka-clifton-10-loparskor-herr-svart/p/1242290_1_Style"},
@@ -226,7 +224,6 @@ function saveSnapshot(){
 }
 /* Verklig observerad prishistorik (SEK), seedas in i trendgrafen */
 const SEED={
-  "idealo.es · prisjämf.":[["2026-06-29",1139],["2026-09-16",1094],["2026-09-23",1003],["2026-09-24",1117],["2026-09-29",1094],["2026-09-30",1117],["2026-10-02",912],["2026-10-04",1117],["2026-10-07",912],["2026-10-10",547],["2026-10-11",1026],["2026-10-14",1117],["2026-10-16",1026],["2026-10-18",1128],["2026-10-22",1083],["2026-11-16",1059]],
   "bergfreunde.se · 1 av 91 varianter i lager":[["2026-06-29",1459],["2026-08-07",1276],["2026-09-16",1094]],
   "vigliettisport.com · vissa storlekar slut":[["2026-06-29",1357],["2026-09-16",1243]],
   "passsport.it · i lager":[["2026-06-29",1642],["2026-09-16",1357]],
@@ -318,7 +315,7 @@ function render(){
 
   document.getElementById("lowPill").innerHTML=`Lägsta: <b>${fmt(lo)}</b> hos ${cheapest.name}`;
 
-  const tagTxt={official:"Officiell",compare:"Prisjämf.",shop:"Butik",warn:"⚠ Lågt betyg"};
+  const tagTxt={official:"Officiell",shop:"Butik",warn:"⚠ Lågt betyg"};
   document.getElementById("rows").innerHTML=rows.map((d,i)=>{
     const s=sek(d), pct=Math.round(((s-lo)/((hi-lo)||1))*100);
     return `<tr>
