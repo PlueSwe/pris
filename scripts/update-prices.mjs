@@ -51,7 +51,7 @@ const HEADERS = {
 };
 
 /* Butiker bakom brandvägg som kräver en riktig webbläsare (Playwright). */
-const NEEDS_BROWSER = [/elgiganten\.se/, /inet\.se/, /geizhals\.de/];
+const NEEDS_BROWSER = [/elgiganten\.se/, /inet\.se/];
 
 /* Butiker där priset bara finns i HTML-metataggar, inte i JSON-LD. Läggs till
    per butik först när den är kontrollerad för hand — en metatagg på en sida med
@@ -127,13 +127,6 @@ async function fetchHtml(url, allowBrowser = true) {
 
 /* Pris ur HTML-metataggar, för butiker utan JSON-LD. */
 function readMetaPrice(html, url) {
-  /* Geizhals skriver sitt lägsta pris i sidtiteln ("... ab € 99,99 (2026) ...")
-     och har ingen JSON-LD alls. Det är en prisjämförare, så "från"-priset är rätt. */
-  if (/geizhals\.de/.test(url)) {
-    const m = html.match(/<title>[^<]*?ab\s*€\s*([\d.]+,\d\d)/i);
-    if (!m) return [];
-    return [{ price: Number(m[1].replace(/\./g, "").replace(",", ".")), currency: "EUR", availability: "InStock", name: "" }];
-  }
   if (JSON_PRICE_OK.some(re => re.test(url))) {
     const priser = [...new Set([...html.matchAll(/"price"\s*:\s*(\d+(?:\.\d+)?)/g)].map(m => Number(m[1])))];
     if (priser.length !== 1) return [];
