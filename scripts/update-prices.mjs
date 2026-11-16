@@ -122,6 +122,13 @@ async function fetchHtml(url, allowBrowser = true) {
 
 /* Pris ur HTML-metataggar, för butiker utan JSON-LD. */
 function readMetaPrice(html, url) {
+  /* Geizhals skriver sitt lägsta pris i sidtiteln ("... ab € 99,99 (2026) ...")
+     och har ingen JSON-LD alls. Det är en prisjämförare, så "från"-priset är rätt. */
+  if (/geizhals\.de/.test(url)) {
+    const m = html.match(/<title>[^<]*?ab\s*€\s*([\d.]+,\d\d)/i);
+    if (!m) return [];
+    return [{ price: Number(m[1].replace(/\./g, "").replace(",", ".")), currency: "EUR", availability: "InStock", name: "" }];
+  }
   if (!META_OK.some(re => re.test(url))) return [];
   const found = new Set();
   for (const re of [/<meta[^>]+(?:product:price:amount|og:price:amount)[^>]+content="([\d.,]+)"/gi,
@@ -191,8 +198,18 @@ function summarize(offers, currency) {
   const inStock = matching.filter(o => /InStock|LimitedAvailability/i.test(o.availability) && !/OutOf/i.test(o.availability));
   const known = matching.filter(o => o.availability);
   const pool = inStock.length ? inStock : matching;
+
+  /* Vanligaste priset, inte det lägsta. En produktsida med storleksvarianter har
+     samma pris om och om igen, medan ett enstaka lägre pris nästan alltid är ett
+     medlems-, student- eller delbetalningspris som inte gäller alla (Elgiganten
+     visar t.ex. både 22 990 kr och medlemspriset 18 392 kr). Lika många av varje
+     pris: ta det högre, det är det man faktiskt betalar. */
+  const antal = new Map();
+  for (const o of pool) antal.set(o.price, (antal.get(o.price) || 0) + 1);
+  const vanligast = [...antal.entries()].sort((a, b) => b[1] - a[1] || b[0] - a[0])[0][0];
+
   return {
-    price: Math.min(...pool.map(o => o.price)),
+    price: vanligast,
     inStock: inStock.length,
     variants: matching.length,
     soldOut: known.length > 0 && inStock.length === 0,
