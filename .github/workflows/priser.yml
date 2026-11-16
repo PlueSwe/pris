@@ -27,6 +27,13 @@ jobs:
         with:
           node-version: '22'
 
+      # Elgiganten, Inet och Geizhals svarar 403/429 på en vanlig hämtning och
+      # kräver en riktig webbläsare. Övriga butiker läses utan den.
+      - name: Installera webbläsare för de blockerande butikerna
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+
       - name: Läs om priserna hos butikerna
         run: node scripts/update-prices.mjs | tee rapport.txt
 

@@ -151,7 +151,6 @@
 
   <footer>
     <p><b>Så funkar pristrenden:</b> Klicka <b>📌 Spara dagens priser</b> för att lagra en ögonblicksbild lokalt (i din webbläsare via localStorage). Nästa gång priserna ändras: uppdatera siffrorna i <code>data</code>-listan högst upp i denna fil, öppna sidan och spara igen — minigrafen i kolumnen <b>Trend</b> växer för varje sparad dag.</p>
-    <p><b>Obs:</b> Varje butik kontrolleras vid olika tillfällen — trendkurvan visar mätdatum per butik. Äldsta mätning i datan är 2026-06-29, och priser kan alltid ha hunnit ändras sedan senaste kontrollen. Prisjämförelsesajter (Runnea, Geizhals, Idealo) visar lägsta listpris från flera handlare, inte en egen butik — och kan inte garantera att din storlek finns. Clifton 10 fasas ut, så storleksutbudet krymper snabbt; kontrollera EU 41⅓ i kassan. Amerikanska butiker är medvetet uteslutna enligt önskemål.</p>
   </footer>
 </div>
 
@@ -181,7 +180,6 @@ const data = [
 const more = [
   {name:"Löplabbet",    flag:"🇸🇪", src:"slutsåld (sista pris 1 007 kr)", url:"https://www.loplabbet.se/loparskor/distans/hoka-one-one-clifton-10-loparskor-herr/black-white"},
   {name:"The Running Company", flag:"🇸🇪", src:"Clifton 11 slut i alla storlekar", url:"https://www.therunningcompany.se/products/hoka-m-clifton-11-flck"},
-  {name:"Runnea",       flag:"🇪🇸", src:"prisjämförare — gick inte att läsa rätt pris", url:"https://www.runnea.com/zapatillas-running/hoka/clifton-10/1043777/precios/todas/"},
   {name:"Bergfreunde",  flag:"🇸🇪", src:"kan ej längre levereras (23/9)", url:"https://www.bergfreunde.se/hoka-clifton-10-springskor/"},
   {name:"SportsShoes",  flag:"🇬🇧", src:"borttagen ur sortimentet", url:"https://www.sportsshoes.com/store/hoka-clifton"},
   {name:"Deporvillage", flag:"🇪🇸", src:"slut (124,95 €)", url:"https://www.deporvillage.com/zapatillas-hoka-clifton-10-negro-blanco"},
@@ -231,7 +229,6 @@ function saveSnapshot(){
 const SEED={
   "geizhals.de · prisjämf.":[["2026-06-29",1134],["2026-08-07",1093],["2026-09-16",1094],["2026-11-16",1140]],
   "idealo.es · prisjämf.":[["2026-06-29",1139],["2026-09-16",1094],["2026-09-23",1003],["2026-09-24",1117],["2026-09-29",1094],["2026-09-30",1117],["2026-10-02",912],["2026-10-04",1117],["2026-10-07",912],["2026-10-10",547],["2026-10-11",1026],["2026-10-14",1117],["2026-10-16",1026],["2026-10-18",1128],["2026-10-22",1083],["2026-11-16",1059]],
-  "runnea.com · prisjämf.":[["2026-06-29",1082],["2026-08-07",1197],["2026-09-16",1197],["2026-10-30",645],["2026-11-03",717],["2026-11-04",683],["2026-11-10",666],["2026-11-11",228]],
   "bergfreunde.se · 1 av 91 varianter i lager":[["2026-06-29",1459],["2026-08-07",1276],["2026-09-16",1094]],
   "vigliettisport.com · vissa storlekar slut":[["2026-06-29",1357],["2026-09-16",1243]],
   "passsport.it · i lager":[["2026-06-29",1642],["2026-09-16",1357]],
