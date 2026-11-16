@@ -150,6 +150,8 @@
 
   <footer>
     <p><b>Senaste genomgång av alla butiker: 2026-11-16.</b> Priserna läses om varje natt direkt ur butikernas egen produktdata; trendkurvan i kolumnen <b>Trend</b> får en punkt varje gång ett pris ändras. Sidan listar bara butiker där skon går att köpa — prisjämförelsesajterna Geizhals, Idealo och Runnea är borttagna eftersom man inte kan handla där. HOKA:s egna butiker blockerar all automatisk kontroll, så deras rader är märkta med det och visar listpris.</p>
+    <p><b>Fem nya butiker tillkom 2026-11-16</b> efter en genomgång av ett sextiotal europeiska återförsäljare: Alltricks, i-Run, Asphaltgold, Shop4Runners och 21run. Dessutom är Outnorth tillbaka i tabellen — butiken stod som slutsåld men har fått in Clifton 11 i 41⅓ igen, elva par. Varje rad är kontrollerad för hand på <b>just storlek EU 41⅓</b> — flera butiker har ett lockpris som bara gäller storlek 42 och uppåt, och de är sorterade bort. Fraktkostnaden till Sverige står i butikskolumnen, eftersom den avgör vilket pris som faktiskt är lägst: i-Run skickar fraktfritt över 90 €, medan Asphaltgold och Shop4Runners lägger på 9,95 €.</p>
+    <p><b>Clifton 10 håller på att ta slut i hela EU.</b> I storlek 41⅓ hittade genomgången inga nya butiker alls — Alltricks har modellen i båda färgerna men 41⅓ är slut i båda, och Globetrotter, Addnature, Outdoorexperten och Top4Running är också slut. De fyra butikerna i tabellen är de som fortfarande har skon.</p>
   </footer>
 </div>
 
@@ -166,7 +168,13 @@ const data = [
 
   /* ===== CLIFTON 11 – kontrollerat 2026-09-23. HOKA:s egna butiker blockerar
      automatisk läsning; deras priser är senast kontrollerade 2026-08-10. ===== */
+  {model:"Clifton 11", name:"Alltricks",      dom:"alltricks.fr · 41⅓ i lager · frakt från 9,99 €", flag:"🇫🇷", priceEur:117.99, camp:"−26 %", type:"shop", rating:null, count:null, url:"https://www.alltricks.fr/F-11912-chaussures-running/P-3301495-chaussures_running_hoka_clifton_11_blanc_bleu_homme"},
+  {model:"Clifton 11", name:"i-Run",          dom:"i-run.fr · 41⅓ i lager · fraktfritt över 90 €", flag:"🇫🇷", priceEur:118.00, camp:"−26 %", type:"shop", rating:null, count:null, url:"https://www.i-run.fr/chaussures_homme/Running_c23/Hoka-One-One_m143/Hoka-One-One-Clifton-11_Hoka-One-One_fiche_147448.html?v=07"},
+  {model:"Clifton 11", name:"Asphaltgold",    dom:"asphaltgold.com · 41⅓ i lager · frakt 9,95 €", flag:"🇩🇪", priceEur:120.00, camp:"−24 %", type:"shop", rating:null, count:null, url:"https://www.asphaltgold.com/en/products/hoka-clifton-11-boulder-grey-pebble-grey"},
   {model:"Clifton 11", name:"Bergfreunde",    dom:"bergfreunde.se · Clifton 11", flag:"🇸🇪", priceEur:127.96, camp:"−20 % · fraktfritt", type:"shop", rating:5.0, count:9718, url:"https://www.bergfreunde.se/hoka-clifton-11-springskor/"},
+  {model:"Clifton 11", name:"Shop4Runners",   dom:"shop4runners.eu · 41⅓ i lager · frakt 9,95 €", flag:"🇩🇪", priceEur:129.99, camp:"−19 %", type:"shop", rating:null, count:null, url:"https://shop4runners.eu/clifton-11-348238"},
+  {model:"Clifton 11", name:"21run",          dom:"21run.com · 41⅓ direkt tillgänglig · fri frakt", flag:"🇪🇺", priceSek:1621, camp:"−19 %", type:"shop", rating:4.0, count:1008, url:"https://21run.com/se/hoka-clifton-11-herr-1176572-bwht"},
+  {model:"Clifton 11", name:"Outnorth",       dom:"outnorth.com · 41⅓ i lager (11 par)", flag:"🇸🇪", priceSek:1999, type:"shop", rating:null, count:null, url:"https://www.outnorth.com/se/herr/herrskor/loparskor-herr/roadskor-herr/hoka-men-s-clifton-11-black-black-FS692417"},
   {model:"Clifton 11", name:"SportsShoes",    dom:"sportsshoes.com · Clifton 11", flag:"🇬🇧", priceGbp:125.99, camp:"−10 %", type:"shop", rating:null, count:null, url:"https://www.sportsshoes.com/store/hoka-clifton"},
   {model:"Clifton 11", name:"Intersport",     dom:"intersport.se · vissa storlekar slut", flag:"🇸🇪", priceSek:1999, type:"shop", rating:null, count:null, url:"https://www.intersport.se/products/hoka-one-one-clifton-11-m-loparskor-herr/frost-black-162601604"},
   {model:"Clifton 11", name:"HOKA (officiell, SE)",dom:"hoka.com · butiken blockerar kontroll", flag:"🇸🇪", priceSek:2300, type:"official", rating:null, count:null, url:"https://www.hoka.com/en/se/men-road/clifton-11/1176572.html"},
@@ -181,7 +189,24 @@ const more = [
   {name:"SportsShoes",  flag:"🇬🇧", src:"borttagen ur sortimentet", url:"https://www.sportsshoes.com/store/hoka-clifton"},
   {name:"Deporvillage", flag:"🇪🇸", src:"slut (124,95 €)", url:"https://www.deporvillage.com/zapatillas-hoka-clifton-10-negro-blanco"},
   {name:"Löparshop",    flag:"🇸🇪", src:"ej i lager", url:"https://www.loparshop.se/hoka-men-s-clifton-10-1162030-bblc.html"},
-  {name:"Outnorth",     flag:"🇸🇪", src:"slutsåld", url:"https://www.outnorth.com/se/varumarken/hoka/hoka-men-s-clifton-10-black-white-FS592025"},
+  {name:"Outnorth",     flag:"🇸🇪", src:"Clifton 10 slutsåld (Clifton 11 finns, se tabellen)", url:"https://www.outnorth.com/se/varumarken/hoka/hoka-men-s-clifton-10-black-white-FS592025"},
+  {name:"Alltricks",    flag:"🇫🇷", src:"Clifton 10: 41⅓ slut i båda färgerna", url:"https://www.alltricks.fr/F-11912-chaussures-running/P-3188621-chaussures_running_hoka_clifton_10_gris_vert_homme"},
+  {name:"Globetrotter", flag:"🇩🇪", src:"41⅓ slutsåld"},
+  {name:"Addnature",    flag:"🇸🇪", src:"41⅓ slutsåld (1 499 kr)"},
+  {name:"Outdoorexperten",flag:"🇸🇪", src:"41⅓ slutsåld (1 499 kr)"},
+  {name:"Top4Running",  flag:"🇸🇪", src:"41⅓ slutsåld i båda modellerna"},
+  {name:"Sport Conrad", flag:"🇩🇪", src:"minsta storlek 43⅓"},
+  {name:"Sportler",     flag:"🇮🇹", src:"anger bara US-storlekar"},
+  {name:"Team Sportia", flag:"🇸🇪", src:"anger inte vilket storlekssystem som används"},
+  {name:"Care of Carl", flag:"🇸🇪", src:"motstridig lagerstatus (1 999 kr)"},
+  {name:"Engelhorn",    flag:"🇩🇪", src:"skickar inte till Sverige"},
+  {name:"Hervis",       flag:"🇦🇹", src:"skickar inte till Sverige"},
+  {name:"Maxisport",    flag:"🇮🇹", src:"skickar inte till Sverige"},
+  {name:"Ekosport",     flag:"🇫🇷", src:"skickar inte till Sverige"},
+  {name:"Sportano",     flag:"🇪🇺", src:"skickar inte till Sverige"},
+  {name:"Anton Sport",  flag:"🇳🇴", src:"Norge ligger utanför EU:s tullunion"},
+  {name:"RunningXpert", flag:"🇩🇰", src:"145 € – dyrare än listan, samma butik som Löparshop"},
+  {name:"Sportisimo",   flag:"🇨🇿", src:"blockerar all automatisk kontroll"},
   {name:"Zalando.se",   flag:"🇸🇪", src:"slutsåld", url:"https://www.zalando.se/hoka-clifton-10-vaegloeparskor-blackwhite-h1x41a01k-q12.html"},
   {name:"Zalando.de",   flag:"🇩🇪", src:"ausverkauft", url:"https://www.zalando.de/hoka-clifton-10-laufschuh-strasse-black-h1x42a01t-q11.html"},
   {name:"RunningDirect",flag:"🇸🇪", src:"inte längre tillgänglig"},
@@ -229,6 +254,12 @@ const SEED={
   "passsport.it · i lager":[["2026-06-29",1642],["2026-09-16",1357]],
   "bergfreunde.se · Clifton 11":[["2026-08-12",1732],["2026-09-16",1659],["2026-09-23",1605],["2026-09-29",1568],["2026-10-17",1513],["2026-10-22",1495],["2026-10-27",1477],["2026-11-04",1441],["2026-11-06",1459]],
   "sportsshoes.com · Clifton 11":[["2026-08-07",1876],["2026-09-16",1688]],
+  "alltricks.fr · 41⅓ i lager · frakt från 9,99 €":[["2026-11-16",1345]],
+  "i-run.fr · 41⅓ i lager · fraktfritt över 90 €":[["2026-11-16",1345]],
+  "asphaltgold.com · 41⅓ i lager · frakt 9,95 €":[["2026-11-16",1368]],
+  "shop4runners.eu · 41⅓ i lager · frakt 9,95 €":[["2026-11-16",1482]],
+  "21run.com · 41⅓ direkt tillgänglig · fri frakt":[["2026-11-16",1621]],
+  "outnorth.com · 41⅓ i lager (11 par)":[["2026-11-16",1999]],
 };
 function sparkline(d){
   const seed=(SEED[d.dom]||[]).map(([date,v])=>({date,sek:v}));

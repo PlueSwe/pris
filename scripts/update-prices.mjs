@@ -51,7 +51,7 @@ const HEADERS = {
 };
 
 /* Butiker bakom brandvägg som kräver en riktig webbläsare (Playwright). */
-const NEEDS_BROWSER = [/elgiganten\.se/, /inet\.se/, /proshop\.se/];
+const NEEDS_BROWSER = [/elgiganten\.se/, /inet\.se/, /proshop\.se/, /alltricks\.fr/, /asphaltgold\.com/];
 
 /* Butiker där priset bara finns i HTML-metataggar, inte i JSON-LD. Läggs till
    per butik först när den är kontrollerad för hand — en metatagg på en sida med
