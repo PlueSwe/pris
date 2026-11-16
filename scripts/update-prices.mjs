@@ -56,7 +56,12 @@ const NEEDS_BROWSER = [/elgiganten\.se/, /inet\.se/, /geizhals\.de/];
 /* Butiker där priset bara finns i HTML-metataggar, inte i JSON-LD. Läggs till
    per butik först när den är kontrollerad för hand — en metatagg på en sida med
    flera varianter kan annars peka på en billigare variant än radens. */
-const META_OK = [/njgolf\.se/];
+const META_OK = [/njgolf\.se/, /vigliettisport\.com/];
+
+/* Butiker som lägger priset i en inbäddad JSON-klump i stället för JSON-LD.
+   Används bara när sidan innehåller exakt ett pris, så att rekommenderade
+   produkter längre ner på sidan inte kan förväxlas med varan. */
+const JSON_PRICE_OK = [/xxl\.se/];
 
 const report = { updated: [], unchanged: [], soldOut: [], manual: [], failed: [] };
 
@@ -128,6 +133,12 @@ function readMetaPrice(html, url) {
     const m = html.match(/<title>[^<]*?ab\s*€\s*([\d.]+,\d\d)/i);
     if (!m) return [];
     return [{ price: Number(m[1].replace(/\./g, "").replace(",", ".")), currency: "EUR", availability: "InStock", name: "" }];
+  }
+  if (JSON_PRICE_OK.some(re => re.test(url))) {
+    const priser = [...new Set([...html.matchAll(/"price"\s*:\s*(\d+(?:\.\d+)?)/g)].map(m => Number(m[1])))];
+    if (priser.length !== 1) return [];
+    const iLager = /"stockStatus"\s*:\s*"(?:INSTOCK|LOWSTOCK)"/.test(html);
+    return [{ price: priser[0], currency: "SEK", availability: iLager ? "InStock" : "OutOfStock", name: "" }];
   }
   if (!META_OK.some(re => re.test(url))) return [];
   const found = new Set();
