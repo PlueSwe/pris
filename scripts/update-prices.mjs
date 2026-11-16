@@ -19,16 +19,49 @@ const TODAY = new Date().toISOString().slice(0, 10);
 const FILES = ["public/skor.html", "public/datorer.html", "public/galaxybook.html", "public/golf.html"];
 
 /* Sidor som inte är en enskild produktsida — priset går inte att läsa säkert. */
-const SKIP = [/apple\.com/, /ebay\./, /blocket\.se/, /tradera\.com/, /\/search/, /\bq=/, /collections\//, /scandinavianphoto\.se\/dator/];
+const SKIP = [
+  /apple\.com/, /ebay\./, /blocket\.se/, /tradera\.com/, /\/search/, /\bq=/, /collections\//,
+  /scandinavianphoto\.se\/dator/,
+  /runnea\.com/,          // listar alla butikers priser för alla varianter på samma sida
+  /out-of-bounds\.se/,    // flera kvalitetsklasser och packstorlekar på samma sida
+  /par71\.de/,            // anger pris i euro, medan golfsidan lagrar kronor
+  /lakeballs\.de/,
+];
 
 /* Växelkurser används bara för trendkurvan i skor.html, som lagras i kronor. */
 const EUR_SEK = 11.4, GBP_SEK = 13.4;
 
-const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36";
+const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36";
+
+/* Flera butiker svarar 403/429 på en naken fetch men släpper igenom en begäran som
+   ser ut att komma från Chrome. Hela uppsättningen headers behövs — utan sec-fetch
+   och sec-ch-ua blockerar t.ex. XXL, Intersport och NJGolf. */
+const HEADERS = {
+  "user-agent": UA,
+  "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+  "accept-language": "sv-SE,sv;q=0.9,en-US;q=0.8,en;q=0.7",
+  "sec-ch-ua": '"Chromium";v="141", "Not=A?Brand";v="24", "Google Chrome";v="141"',
+  "sec-ch-ua-mobile": "?0",
+  "sec-ch-ua-platform": '"Windows"',
+  "sec-fetch-dest": "document",
+  "sec-fetch-mode": "navigate",
+  "sec-fetch-site": "none",
+  "sec-fetch-user": "?1",
+  "upgrade-insecure-requests": "1",
+};
+
+/* Butiker bakom brandvägg som kräver en riktig webbläsare (Playwright). */
+const NEEDS_BROWSER = [/elgiganten\.se/, /inet\.se/, /geizhals\.de/];
+
+/* Butiker där priset bara finns i HTML-metataggar, inte i JSON-LD. Läggs till
+   per butik först när den är kontrollerad för hand — en metatagg på en sida med
+   flera varianter kan annars peka på en billigare variant än radens. */
+const META_OK = [/njgolf\.se/];
 
 const report = { updated: [], unchanged: [], soldOut: [], manual: [], failed: [] };
 
 const lastHit = new Map();
+let browser = null;
 
 /* Butikerna svarar 429 om man hämtar för snabbt — en paus per domän räcker. */
 async function pace(url) {
@@ -38,23 +71,68 @@ async function pace(url) {
   lastHit.set(host, Date.now());
 }
 
-async function fetchHtml(url) {
-  await pace(url);
-  for (let attempt = 0; attempt < 2; attempt++) {
+/* Startas bara om någon rad behöver den, och återanvänds sedan. */
+async function getBrowser() {
+  if (browser === null) {
     try {
-      const res = await fetch(url, {
-        headers: { "user-agent": UA, "accept-language": "sv-SE,sv;q=0.9,en;q=0.8" },
-        redirect: "follow",
-        signal: AbortSignal.timeout(25000),
-      });
+      const { chromium } = await import("playwright");
+      browser = await chromium.launch({ args: ["--disable-blink-features=AutomationControlled"] });
+    } catch (err) {
+      browser = false;
+      console.error("Playwright saknas eller gick inte att starta: " + err.message);
+    }
+  }
+  return browser;
+}
+
+async function fetchViaBrowser(url) {
+  const b = await getBrowser();
+  if (!b) return { error: "ingen webbläsare tillgänglig" };
+  let page;
+  try {
+    const ctx = await b.newContext({ userAgent: UA, locale: "sv-SE", viewport: { width: 1440, height: 900 } });
+    page = await ctx.newPage();
+    const res = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 45000 });
+    if (res && (res.status() === 404 || res.status() === 410)) return { gone: true };
+    await page.waitForTimeout(2500);
+    return { html: await page.content(), via: "webbläsare" };
+  } catch (err) {
+    return { error: "webbläsare: " + err.message.split("\n")[0].slice(0, 60) };
+  } finally {
+    if (page) await page.context().close().catch(() => {});
+  }
+}
+
+async function fetchHtml(url, allowBrowser = true) {
+  if (allowBrowser && NEEDS_BROWSER.some(re => re.test(url))) return fetchViaBrowser(url);
+  await pace(url);
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const res = await fetch(url, { headers: HEADERS, redirect: "follow", signal: AbortSignal.timeout(25000) });
       if (res.status === 404 || res.status === 410) return { gone: true };
       if (!res.ok) throw new Error("HTTP " + res.status);
       return { html: await res.text(), finalUrl: res.url };
     } catch (err) {
-      if (attempt === 1) return { error: err.message };
-      await new Promise(r => setTimeout(r, 3000));
+      /* Sista utvägen för en blockerad sida är en riktig webbläsare. */
+      if (attempt === 2) return allowBrowser ? await fetchViaBrowser(url) : { error: err.message };
+      await new Promise(r => setTimeout(r, 5000 * (attempt + 1)));
     }
   }
+}
+
+/* Pris ur HTML-metataggar, för butiker utan JSON-LD. */
+function readMetaPrice(html, url) {
+  if (!META_OK.some(re => re.test(url))) return [];
+  const found = new Set();
+  for (const re of [/<meta[^>]+(?:product:price:amount|og:price:amount)[^>]+content="([\d.,]+)"/gi,
+                    /itemprop="price"[^>]*content="([\d.,]+)"/gi]) {
+    for (const m of html.matchAll(re)) found.add(Number(m[1].replace(/\s/g, "").replace(",", ".")));
+  }
+  const prices = [...found].filter(n => Number.isFinite(n) && n > 0);
+  /* Flera olika metapriser = sidan har varianter, och då vet vi inte vilken som är radens. */
+  if (prices.length !== 1) return [];
+  const soldOut = /utg[åa]ngen|slutsåld|ej i lager|OutOfStock/i.test(html);
+  return [{ price: prices[0], currency: "SEK", availability: soldOut ? "OutOfStock" : "InStock", name: "" }];
 }
 
 /* Plockar ut alla erbjudanden ur sidans JSON-LD. */
@@ -67,7 +145,8 @@ function readOffers(html) {
     const type = [].concat(node["@type"] || []);
     if (typeof node.name === "string") name = node.name;
     if (type.some(t => /Offer/.test(t))) {
-      const price = node.price ?? node.lowPrice ?? node.highPrice;
+      const price = node.price ?? node.lowPrice ?? node.priceSpecification?.price
+                 ?? node.priceSpecification?.["@list"]?.[0]?.price ?? node.highPrice;
       if (price != null && price !== "") {
         offers.push({
           price: Number(String(price).replace(/\s/g, "").replace(",", ".")),
@@ -161,18 +240,27 @@ async function run() {
       if (res.error) { report.failed.push(`${label} — ${res.error}`); continue; }
 
       let offers = readOffers(res.html);
+      if (!offers.length) offers = readMetaPrice(res.html, url);
       if (!offers.length) offers = await readShopify(url);
       if (match) offers = offers.filter(o => o.name.toLowerCase().includes(match.toLowerCase()));
       const found = summarize(offers, currency);
       if (!found) { report.manual.push(`${label} — ingen läsbar JSON-LD`); continue; }
 
-      /* Skydd mot feltolkning: ett pris som avviker extremt skrivs aldrig in. */
-      if (found.price < current / 3 || found.price > current * 3) {
-        report.manual.push(`${label} — avvikande pris ${found.price} mot ${current}, kontrollera`);
+      /* Skydd mot feltolkning. Ett enskilt steg på mer än 30 % är nästan alltid en
+         felläsning, och utan den gränsen kan ett pris vandra bort över flera nätter
+         utan att någon enskild körning ser fel (Runnea gick så från 105 till 20 €). */
+      const change = Math.abs(found.price - current) / current;
+      if (change > 0.30) {
+        report.manual.push(`${label} — läste ${found.price} mot ${current} (${Math.round(change * 100)} % skillnad), skrivs inte in`);
         continue;
       }
 
-      if (found.soldOut) report.soldOut.push(`${label} — slut i alla ${found.variants} varianter`);
+      /* Är varan slut behålls det senaste priset — ett pris på en slutsåld vara är
+         inget fynd, och butikerna visar ofta kvarvarande varianter eller strukna priser. */
+      if (found.soldOut) {
+        report.soldOut.push(`${label} — slut i alla ${found.variants} varianter, priset lämnas orört`);
+        continue;
+      }
 
       const rounded = currency === "SEK" ? Math.round(found.price) : Math.round(found.price * 100) / 100;
       if (rounded === current) { report.unchanged.push(label); continue; }
@@ -203,6 +291,8 @@ async function run() {
   section("GICK INTE ATT HÄMTA", report.failed);
   lines.push(`\nOförändrade: ${report.unchanged.length} rader. Körningen gjord ${TODAY}${DRY ? " (torrkörning)" : ""}.`);
   console.log(lines.join("\n"));
+
+  if (browser) await browser.close();
 
   /* Exit 0 även utan ändringar — arbetsflödet avgör själv om det finns något att committa. */
 }
